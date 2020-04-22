@@ -55,7 +55,7 @@ public class ItemDaoImpl implements ItemDao {
     @Override
     public void deleteByItem(Item item) {
         for (int i = 0; i < Storage.items.size(); i++) {
-            if (Storage.items.get(i).equals(item)) {
+            if (Storage.items.get(i).getItemId().equals(item.getItemId())) {
                 Storage.items.remove(item);
                 return;
             }

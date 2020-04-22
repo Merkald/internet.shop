@@ -12,7 +12,8 @@ public class Item {
     private BigDecimal price;
 
     public Item(String name, BigDecimal price) {
-        itemId = ++Storage.itemsId;
+        count = 0;
+        itemId = Storage.itemsId++;
         this.name = name;
         this.price = price;
     }
@@ -58,5 +59,15 @@ public class Item {
     @Override
     public int hashCode() {
         return Objects.hash(itemId, name, price);
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "count=" + count +
+                ", itemId=" + itemId +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                '}' + "\n";
     }
 }
