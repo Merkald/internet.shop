@@ -9,13 +9,13 @@ public class ShoppingCart {
     private List<Product> items;
     private User user;
 
-    public void setShoppingCartId(Long shoppingCartId) {
-        this.shoppingCartId = shoppingCartId;
-    }
-
     public ShoppingCart(User user) {
         items = new ArrayList<>();
         this.user = user;
+    }
+
+    public void setShoppingCartId(Long shoppingCartId) {
+        this.shoppingCartId = shoppingCartId;
     }
 
     public Long getShoppingCartId() {

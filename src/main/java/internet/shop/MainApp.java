@@ -33,7 +33,8 @@ public class MainApp {
     }
 
     public static void generateOrder(UserService userService,
-                                     ProductService productService, OrderService orderService, int amount) {
+                                     ProductService productService,
+                                     OrderService orderService, int amount) {
         generateItems(productService, amount);
         generateUsers(userService, amount);
         for (int i = 0; i < amount; i++) {
@@ -52,18 +53,23 @@ public class MainApp {
         generateItems(productService, 7);
         addLotOfProducts(6, 5, shoppingCartService, productService);
         System.out.println(shoppingCartService.getShoppingCart(6L));
-        System.out.println(shoppingCartService.getAllProducts(shoppingCartService.getShoppingCart(6L)));
+        System.out.println(shoppingCartService.getAllProducts(shoppingCartService
+                .getShoppingCart(6L)));
         System.out.println(shoppingCartService.getByUserId(7L));
-        shoppingCartService.deleteProduct(shoppingCartService.getShoppingCart(6L), productService.get(1));
-        System.out.println(shoppingCartService.getAllProducts(shoppingCartService.getShoppingCart(6L)));
+        shoppingCartService.deleteProduct(shoppingCartService
+                .getShoppingCart(6L), productService.get(1));
+        System.out.println(shoppingCartService.getAllProducts(shoppingCartService
+                .getShoppingCart(6L)));
         shoppingCartService.clear(shoppingCartService.getShoppingCart(6L));
         System.out.println(shoppingCartService.getShoppingCart(6L));
     }
 
-    public static void addLotOfProducts(long cartId, int amount, ShoppingCartService shoppingCartService,
+    public static void addLotOfProducts(long cartId, int amount,
+                                        ShoppingCartService shoppingCartService,
                                         ProductService productService) {
         for (int i = 0; i < amount; i++) {
-            shoppingCartService.addProduct(shoppingCartService.getShoppingCart(cartId), productService.get(i));
+            shoppingCartService.addProduct(shoppingCartService
+                    .getShoppingCart(cartId), productService.get(i));
         }
     }
 

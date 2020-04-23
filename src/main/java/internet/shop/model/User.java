@@ -13,10 +13,6 @@ public class User {
     private Integer phone;
     private String password;
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
     public User(String firstName, String lastName,
                 int age, String login, String email, String password) {
         this.firstName = firstName;
@@ -25,6 +21,10 @@ public class User {
         this.login = login;
         this.email = email;
         this.password = password;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Long getUserId() {
