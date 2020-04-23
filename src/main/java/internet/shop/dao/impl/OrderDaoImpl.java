@@ -3,7 +3,6 @@ package internet.shop.dao.impl;
 import internet.shop.dao.OrderDao;
 import internet.shop.lib.Dao;
 import internet.shop.model.Order;
-import internet.shop.model.Product;
 import internet.shop.model.User;
 import internet.shop.storage.Storage;
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.stream.Collectors;
 public class OrderDaoImpl implements OrderDao {
     @Override
     public Order completeOrder(Order order) {
-        Storage.orders.add(order);
+        Storage.addOrder(order);
         return order;
     }
 
@@ -27,16 +26,18 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public Optional<Order> get(Long id) {
-        return Optional.empty();
+        return Storage.orders.stream()
+                .filter(order -> order.getOrderId().equals(id))
+                .findFirst();
     }
 
     @Override
     public List<Order> getAll() {
-        return null;
+        return Storage.orders;
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        return Storage.orders.removeIf(order -> order.getOrderId().equals(id));
     }
 }

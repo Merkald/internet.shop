@@ -54,6 +54,6 @@ public class Order {
                 + "orderId=" + orderId
                 + ", items=" + products
                 + ", user=" + user
-                + '}' + "\n";
+                + '}';
     }
 }

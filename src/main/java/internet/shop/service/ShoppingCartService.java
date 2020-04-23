@@ -3,7 +3,6 @@ package internet.shop.service;
 import internet.shop.model.Product;
 import internet.shop.model.ShoppingCart;
 import java.util.List;
-import java.util.Optional;
 
 public interface ShoppingCartService {
 

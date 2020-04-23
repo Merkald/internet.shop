@@ -4,6 +4,7 @@ import internet.shop.lib.Injector;
 import internet.shop.model.Product;
 import internet.shop.model.ShoppingCart;
 import internet.shop.model.User;
+import internet.shop.service.OrderService;
 import internet.shop.service.ProductService;
 import internet.shop.service.ShoppingCartService;
 import internet.shop.service.UserService;
@@ -14,11 +15,33 @@ public class MainApp {
     private static Injector injector = Injector.getInstance("internet.shop");
 
     public static void main(String[] args) {
-        testShoppingCart();
+        testOrder();
     }
 
-    /////////////////////////////////////////////////////////////////////////////////
-        public static void testShoppingCart () {
+    public static void testOrder() {
+        UserService userService = (UserService) injector.getInstance(UserService.class);
+        ProductService productService = (ProductService) injector
+                .getInstance(ProductService.class);
+        OrderService orderService = (OrderService) injector.getInstance(OrderService.class);
+        generateOrder(userService, productService, orderService, 5);
+        System.out.println(orderService.getAll());
+        orderService.completeOrder(productService.getAll(), userService.get(1));
+        System.out.println(orderService.getUserOrders(userService.get(1)));
+        orderService.delete(0L);
+        orderService.delete(3L);
+        System.out.println(orderService.getAll());
+    }
+
+    public static void generateOrder(UserService userService,
+                                     ProductService productService, OrderService orderService, int amount) {
+        generateItems(productService, amount);
+        generateUsers(userService, amount);
+        for (int i = 0; i < amount; i++) {
+            orderService.completeOrder(productService.getAll(), userService.get(i));
+        }
+    }
+
+    public static void testShoppingCart() {
         UserService userService = (UserService) injector.getInstance(UserService.class);
         ProductService productService = (ProductService) injector
                 .getInstance(ProductService.class);
@@ -37,15 +60,15 @@ public class MainApp {
         System.out.println(shoppingCartService.getShoppingCart(6L));
     }
 
-        public static void addLotOfProducts ( long cartId, int amount, ShoppingCartService shoppingCartService,
-            ProductService productService){
+    public static void addLotOfProducts(long cartId, int amount, ShoppingCartService shoppingCartService,
+                                        ProductService productService) {
         for (int i = 0; i < amount; i++) {
             shoppingCartService.addProduct(shoppingCartService.getShoppingCart(cartId), productService.get(i));
         }
     }
 
-        public static void generateShoppingCarts (UserService userService,
-            ShoppingCartService shoppingCartService,int amount){
+    public static void generateShoppingCarts(UserService userService,
+                                             ShoppingCartService shoppingCartService, int amount) {
         generateUsers(userService, 10);
 
         for (int i = 0; i < amount; i++) {
@@ -53,8 +76,6 @@ public class MainApp {
             shoppingCartService.addShoppingCart(shoppingCart);
         }
     }
-
-    ///////////////////////////////////////////////////////////////////////
 
     public static void testUser() {
         UserService userService = (UserService) injector.getInstance(UserService.class);
@@ -82,8 +103,6 @@ public class MainApp {
         }
     }
 
-    ////////////////////////////////////////////////////////////////////////
-
     public static void testProduct() {
         ProductService productService = (ProductService) injector.getInstance(ProductService.class);
         generateItems(productService, 8);
@@ -102,6 +121,4 @@ public class MainApp {
             productService.create(new Product("Item: " + i, new BigDecimal(i)));
         }
     }
-
-    /////////////////////////////////////////////////////////////////////////
 }

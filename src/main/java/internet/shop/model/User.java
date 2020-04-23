@@ -13,20 +13,6 @@ public class User {
     private Integer phone;
     private String password;
 
-    @Override
-    public String toString() {
-        return "User{"
-                + "userId=" + userId
-                + ", firstName='" + firstName + '\''
-                + ", lastName='" + lastName + '\''
-                + ", age=" + age
-                + ", login='" + login + '\''
-                + ", email='" + email + '\''
-                + ", phone=" + phone
-                + ", password='" + password + '\''
-                + '}' + "\n";
-    }
-
     public void setUserId(Long userId) {
         this.userId = userId;
     }
@@ -124,5 +110,19 @@ public class User {
     public int hashCode() {
         return Objects.hash(getUserId(), getFirstName(), getLastName(), getAge(),
                 getLogin(), getEmail(), getPhone(), getPassword());
+    }
+
+    @Override
+    public String toString() {
+        return "User{"
+                + "userId=" + userId
+                + ", firstName='" + firstName + '\''
+                + ", lastName='" + lastName + '\''
+                + ", age=" + age
+                + ", login='" + login + '\''
+                + ", email='" + email + '\''
+                + ", phone=" + phone
+                + ", password='" + password + '\''
+                + '}' + "\n";
     }
 }
