@@ -1,19 +1,16 @@
 package internet.shop.model;
 
-import internet.shop.storage.Storage;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Bucket {
     private Long bucketId;
-    private List<Item> items;
+    private List<Product> products;
     private User user;
 
     public Bucket(User user) {
-        bucketId = ++Storage.bucketsId;
-        items = new ArrayList<>();
+        products = new ArrayList<>();
         this.user = user;
     }
 
@@ -21,12 +18,12 @@ public class Bucket {
         return bucketId;
     }
 
-    public List<Item> getItems() {
-        return items;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public User getUser() {
@@ -39,16 +36,20 @@ public class Bucket {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Bucket)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Bucket)) {
+            return false;
+        }
         Bucket bucket = (Bucket) o;
-        return getBucketId().equals(bucket.getBucketId()) &&
-                getItems().equals(bucket.getItems()) &&
-                getUser().equals(bucket.getUser());
+        return getBucketId().equals(bucket.getBucketId())
+                && getProducts().equals(bucket.getProducts())
+                && getUser().equals(bucket.getUser());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getBucketId(), getItems(), getUser());
+        return Objects.hash(getBucketId(), getProducts(), getUser());
     }
 }

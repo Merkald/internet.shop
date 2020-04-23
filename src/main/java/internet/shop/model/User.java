@@ -1,25 +1,22 @@
 package internet.shop.model;
 
-import internet.shop.storage.Storage;
-
 import java.util.Objects;
 import java.util.Optional;
 
 public class User {
     private Long userId;
-    private String fName;
-    private String lName;
+    private String firstName;
+    private String lastName;
     private int age;
     private String login;
     private String email;
     private Integer phone;
     private String password;
 
-    public User(String fName, String lName
-            , int age, String login, String email, String password) {
-        userId = ++Storage.usersId;
-        this.fName = fName;
-        this.lName = lName;
+    public User(String firstName, String lastName,
+                int age, String login, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.age = age;
         this.login = login;
         this.email = email;
@@ -30,20 +27,20 @@ public class User {
         return userId;
     }
 
-    public String getfName() {
-        return fName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setfName(String fName) {
-        this.fName = fName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getlName() {
-        return lName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setlName(String lName) {
-        this.lName = lName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public int getAge() {
@@ -88,21 +85,26 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof User)) {
+            return false;
+        }
         User user = (User) o;
-        return getAge() == user.getAge() &&
-                getUserId().equals(user.getUserId()) &&
-                getfName().equals(user.getfName()) &&
-                getlName().equals(user.getlName()) &&
-                getLogin().equals(user.getLogin()) &&
-                getEmail().equals(user.getEmail()) &&
-                Objects.equals(getPhone(), user.getPhone()) &&
-                getPassword().equals(user.getPassword());
+        return getAge() == user.getAge()
+                && getUserId().equals(user.getUserId())
+                && getFirstName().equals(user.getFirstName())
+                && getLastName().equals(user.getLastName())
+                && getLogin().equals(user.getLogin())
+                && getEmail().equals(user.getEmail())
+                && Objects.equals(getPhone(), user.getPhone())
+                && getPassword().equals(user.getPassword());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUserId(), getfName(), getlName(), getAge(), getLogin(), getEmail(), getPhone(), getPassword());
+        return Objects.hash(getUserId(), getFirstName(), getLastName(),
+                getAge(), getLogin(), getEmail(), getPhone(), getPassword());
     }
 }
