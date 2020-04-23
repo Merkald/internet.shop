@@ -40,7 +40,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public void deleteByItem(Product product) {
+    public void deleteByProduct(Product product) {
         deleteById(product.getProductId());
     }
 }

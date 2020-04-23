@@ -13,6 +13,10 @@ public class Order {
         this.user = user;
     }
 
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
     public Long getOrderId() {
         return Long.valueOf(orderId);
     }
@@ -50,6 +54,6 @@ public class Order {
                 + "orderId=" + orderId
                 + ", items=" + products
                 + ", user=" + user
-                + '}';
+                + '}' + "\n";
     }
 }
