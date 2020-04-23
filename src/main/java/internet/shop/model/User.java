@@ -104,7 +104,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUserId(), getFirstName(), getLastName(),
-                getAge(), getLogin(), getEmail(), getPhone(), getPassword());
+        return Objects.hash(getUserId(), getFirstName(), getLastName(), getAge(),
+                getLogin(), getEmail(), getPhone(), getPassword());
     }
 }

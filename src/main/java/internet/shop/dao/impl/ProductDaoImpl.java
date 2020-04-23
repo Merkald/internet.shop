@@ -11,26 +11,24 @@ import java.util.Optional;
 public class ProductDaoImpl implements ProductDao {
     @Override
     public Product create(Product product) {
-        product.setProductId(Storage.itemsId++);
-        Storage.PRODUCTS.add(product);
-        return product;
+        return Storage.addProduct(product);
     }
 
     @Override
     public Optional<Product> get(Long id) {
-        return Storage.PRODUCTS.stream()
+        return Storage.products.stream()
                 .filter(i -> i.getProductId().equals(id))
                 .findFirst();
     }
 
     @Override
     public List<Product> getAll() {
-        return Storage.PRODUCTS;
+        return Storage.products;
     }
 
     @Override
     public Product update(Product newProduct) {
-        Storage.PRODUCTS.stream()
+        Storage.products.stream()
                 .filter(i -> i.getProductId().equals(newProduct.getProductId()))
                 .forEach(i -> i = newProduct);
         return newProduct;
@@ -38,7 +36,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public void deleteById(Long id) {
-        Storage.PRODUCTS.removeIf(item -> item.getProductId().equals(id));
+        Storage.products.removeIf(item -> item.getProductId().equals(id));
     }
 
     @Override

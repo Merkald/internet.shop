@@ -5,7 +5,6 @@ import internet.shop.lib.Inject;
 import internet.shop.lib.Service;
 import internet.shop.model.Product;
 import internet.shop.service.ProductService;
-import internet.shop.storage.Storage;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -27,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAll() {
-        return Storage.PRODUCTS;
+        return productDao.getAll();
     }
 
     @Override

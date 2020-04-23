@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Product {
-    private Long itemId;
+    private Long productId;
     private String name;
     private BigDecimal price;
 
@@ -14,11 +14,11 @@ public class Product {
     }
 
     public void setProductId(Long itemId) {
-        this.itemId = itemId;
+        this.productId = itemId;
     }
 
     public Long getProductId() {
-        return itemId;
+        return productId;
     }
 
     public String getName() {
@@ -46,20 +46,20 @@ public class Product {
             return false;
         }
         Product product = (Product) o;
-        return itemId.equals(product.itemId)
+        return productId.equals(product.productId)
                 && name.equals(product.name)
                 && price.equals(product.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(itemId, name, price);
+        return Objects.hash(productId, name, price);
     }
 
     @Override
     public String toString() {
         return "Item{"
-                + "itemId=" + itemId
+                + "itemId=" + productId
                 + ", name='" + name + '\''
                 + ", price=" + price
                 + '}';
