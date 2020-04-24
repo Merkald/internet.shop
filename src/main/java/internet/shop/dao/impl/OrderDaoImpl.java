@@ -3,25 +3,17 @@ package internet.shop.dao.impl;
 import internet.shop.dao.OrderDao;
 import internet.shop.lib.Dao;
 import internet.shop.model.Order;
-import internet.shop.model.User;
 import internet.shop.storage.Storage;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Dao
 public class OrderDaoImpl implements OrderDao {
+
     @Override
     public Order create(Order order) {
         Storage.addOrder(order);
         return order;
-    }
-
-    @Override
-    public List<Order> getUserOrders(User user) {
-        return Storage.orders.stream()
-                .filter(order -> order.getUser().equals(user))
-                .collect(Collectors.toList());
     }
 
     @Override

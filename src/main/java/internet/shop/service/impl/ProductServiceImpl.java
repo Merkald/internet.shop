@@ -10,6 +10,7 @@ import java.util.NoSuchElementException;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+
     @Inject
     private ProductDao productDao;
 
@@ -41,6 +42,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteByProduct(Product product) {
-        productDao.deleteByProduct(product);
+        productDao.deleteById(product.getProductId());
     }
 }
