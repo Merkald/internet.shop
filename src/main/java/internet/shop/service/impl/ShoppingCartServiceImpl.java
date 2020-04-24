@@ -30,7 +30,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public ShoppingCart addProduct(ShoppingCart shoppingCart, Product product) {
-        return shoppingCartDao.addProduct(shoppingCart, product);
+        shoppingCartDao.getShoppingCart(shoppingCart.getShoppingCartId())
+                .orElseThrow().getItems().add(product);
+        return shoppingCart;
     }
 
     @Override
@@ -50,6 +52,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public List<Product> getAllProducts(ShoppingCart shoppingCart) {
-        return shoppingCartDao.getAllProducts(shoppingCart);
+        return shoppingCartDao.getShoppingCart(shoppingCart
+                .getShoppingCartId())
+                .orElseThrow()
+                .getItems();
     }
 }

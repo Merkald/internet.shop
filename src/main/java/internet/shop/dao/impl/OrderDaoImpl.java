@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Dao
 public class OrderDaoImpl implements OrderDao {
     @Override
-    public Order completeOrder(Order order) {
+    public Order create(Order order) {
         Storage.addOrder(order);
         return order;
     }

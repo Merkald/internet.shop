@@ -28,13 +28,6 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     }
 
     @Override
-    public ShoppingCart addProduct(ShoppingCart shoppingCart, Product product) {
-        return Storage.shoppingCards.stream()
-                .filter(card -> card.getShoppingCartId().equals(shoppingCart.getShoppingCartId()))
-                .peek(card -> card.getItems().add(product)).findFirst().orElseThrow();
-    }
-
-    @Override
     public boolean deleteProduct(ShoppingCart shoppingCart, Product product) {
         if (Storage.shoppingCards.get(shoppingCart.getShoppingCartId().intValue())
                 .getItems().stream().filter(i -> i.equals(product)).findFirst().isEmpty()) {
@@ -56,12 +49,5 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
         return Storage.shoppingCards.stream()
                 .filter(cart -> cart.getUser().getUserId().equals(userId))
                 .findFirst().orElseThrow();
-    }
-
-    @Override
-    public List<Product> getAllProducts(ShoppingCart shoppingCart) {
-        return Storage.shoppingCards.stream()
-                .filter(cart -> cart.equals(shoppingCart))
-                .findFirst().orElseThrow().getItems();
     }
 }

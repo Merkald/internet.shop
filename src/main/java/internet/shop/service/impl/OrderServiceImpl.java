@@ -1,7 +1,6 @@
 package internet.shop.service.impl;
 
 import internet.shop.dao.OrderDao;
-import internet.shop.dao.ShoppingCartDao;
 import internet.shop.lib.Inject;
 import internet.shop.lib.Service;
 import internet.shop.model.Order;
@@ -22,7 +21,7 @@ public class OrderServiceImpl implements OrderService {
         List<Product> productsClone = new ArrayList<>();
         productsClone.addAll(products);
         Order order = new Order(user, productsClone);
-        return orderDao.completeOrder(order);
+        return orderDao.create(order);
     }
 
     @Override

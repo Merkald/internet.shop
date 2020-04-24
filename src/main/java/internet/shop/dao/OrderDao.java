@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface OrderDao {
 
-    Order completeOrder(Order order);
+    Order create(Order order);
 
     List<Order> getUserOrders(User user);
 
