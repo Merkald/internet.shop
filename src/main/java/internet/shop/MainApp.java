@@ -9,6 +9,8 @@ import internet.shop.service.ProductService;
 import internet.shop.service.ShoppingCartService;
 import internet.shop.service.UserService;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainApp {
 
@@ -19,11 +21,13 @@ public class MainApp {
     }
 
     public static void testOrder() {
+        ShoppingCartService shoppingCartService = (ShoppingCartService) injector
+                .getInstance(ShoppingCartService.class);
         UserService userService = (UserService) injector.getInstance(UserService.class);
         ProductService productService = (ProductService) injector
                 .getInstance(ProductService.class);
         OrderService orderService = (OrderService) injector.getInstance(OrderService.class);
-        generateOrder(userService, productService, orderService, 5);
+        generateOrder(userService, productService, orderService, shoppingCartService, 5);
         System.out.println(orderService.getAll());
         orderService.completeOrder(productService.getAll(), userService.get(1));
         System.out.println(orderService.getUserOrders(userService.get(1)));
@@ -34,11 +38,17 @@ public class MainApp {
 
     public static void generateOrder(UserService userService,
                                      ProductService productService,
-                                     OrderService orderService, int amount) {
+                                     OrderService orderService,
+                                     ShoppingCartService shoppingCartService, int amount) {
         generateItems(productService, amount);
         generateUsers(userService, amount);
+        generateShoppingCarts(userService, shoppingCartService, amount);
         for (int i = 0; i < amount; i++) {
-            orderService.completeOrder(productService.getAll(), userService.get(i));
+            addLotOfProducts(i,i,shoppingCartService,productService);
+            orderService.completeOrder(shoppingCartService
+                    .getShoppingCart((long) i)
+                    .getItems(), userService.get(i));
+            shoppingCartService.clear(shoppingCartService.getShoppingCart((long) i));
         }
     }
 
