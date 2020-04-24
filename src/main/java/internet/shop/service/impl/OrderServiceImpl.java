@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class OrderServiceImpl implements OrderService {
 
     @Inject
-    OrderDao orderDao;
+    private OrderDao orderDao;
 
     @Override
     public Order completeOrder(List<Product> products, User user) {

@@ -10,8 +10,9 @@ import java.util.List;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
+
     @Inject
-    ShoppingCartDao shoppingCartDao;
+    private ShoppingCartDao shoppingCartDao;
 
     @Override
     public ShoppingCart get(Long shoppingCartId) {
@@ -52,7 +53,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public ShoppingCart getByUserId(Long userId) {
-        return shoppingCartDao.getByUserId(userId).orElseThrow();
+        return shoppingCartDao.getAll().stream()
+                .filter(shoppingCart -> shoppingCart
+                        .getUser()
+                        .getUserId()
+                        .equals(userId)).findFirst()
+        .orElseThrow();
     }
 
     @Override

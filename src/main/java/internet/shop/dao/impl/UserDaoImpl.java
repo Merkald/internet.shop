@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Dao
 public class UserDaoImpl implements UserDao {
+
     @Override
     public User create(User user) {
         return Storage.addUser(user);
