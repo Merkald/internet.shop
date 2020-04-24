@@ -9,8 +9,13 @@ public class Order {
     private final User user;
 
     public Order(User user, List<Product> products) {
-        this.products = products;
+        List<Product> products1 = products;
+        this.products = products1;
         this.user = user;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
     public Long getOrderId() {

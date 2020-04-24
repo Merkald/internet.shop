@@ -15,6 +15,4 @@ public interface ProductDao {
     Product update(Product newProduct);
 
     void deleteById(Long id);
-
-    void deleteByItem(Product product);
 }
