@@ -9,6 +9,7 @@ import internet.shop.model.User;
 import internet.shop.service.OrderService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -26,7 +27,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getUserOrders(User user) {
-        return orderDao.getUserOrders(user);
+        return orderDao.getAll().stream()
+                .filter(o -> o.getUser().equals(user))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -40,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean delete(Long id) {
-        return orderDao.delete(id);
+    public boolean deleteById(Long id) {
+        return orderDao.deleteById(id);
     }
 }

@@ -35,12 +35,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public boolean deleteById(Long id) {
+        boolean result = Storage.users.stream()
+                .filter(item -> item.getUserId().equals(id)).findFirst().isEmpty();
         Storage.users.removeIf(item -> item.getUserId().equals(id));
-    }
-
-    @Override
-    public void deleteByUser(User user) {
-        deleteById(user.getUserId());
+        return result;
     }
 }

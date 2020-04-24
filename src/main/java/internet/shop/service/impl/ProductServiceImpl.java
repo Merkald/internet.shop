@@ -19,7 +19,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product get(long id) {
+    public Product get(Long id) {
         return productDao.get(id)
                 .orElseThrow(() -> new NoSuchElementException("Cant Find Item With Id " + id));
     }
@@ -35,12 +35,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteById(long id) {
-        productDao.deleteById(id);
+    public boolean deleteById(Long id) {
+        return productDao.deleteById(id);
     }
 
     @Override
-    public void deleteByProduct(Product product) {
-        productDao.deleteByProduct(product);
+    public boolean deleteByProduct(Product product) {
+        return productDao.deleteById(product.getProductId());
     }
 }

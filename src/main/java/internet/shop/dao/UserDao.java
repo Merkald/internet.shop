@@ -1,20 +1,8 @@
 package internet.shop.dao;
 
 import internet.shop.model.User;
-import java.util.List;
-import java.util.Optional;
 
-public interface UserDao {
-
-    User create(User user);
-
-    Optional<User> get(Long id);
-
-    List<User> getAll();
+public interface UserDao extends GenericDao<User, Long> {
 
     User update(User newUser);
-
-    void deleteById(Long id);
-
-    void deleteByUser(User user);
 }

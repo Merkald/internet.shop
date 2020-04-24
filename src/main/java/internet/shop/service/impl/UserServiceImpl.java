@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User get(long id) {
+    public User get(Long id) {
         return userDao.get(id)
                 .orElseThrow(() -> new NoSuchElementException("Cant Find User With Id " + id));
     }
@@ -35,12 +35,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteById(long id) {
-        userDao.deleteById(id);
+    public boolean deleteById(Long id) {
+        return userDao.deleteById(id);
     }
 
     @Override
-    public void deleteByUser(User user) {
-        userDao.deleteById(user.getUserId());
+    public boolean deleteByUser(User user) {
+        return userDao.deleteById(user.getUserId());
     }
 }

@@ -11,12 +11,12 @@ import java.util.Optional;
 @Dao
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
     @Override
-    public ShoppingCart addShoppingCart(ShoppingCart shoppingCart) {
+    public ShoppingCart create(ShoppingCart shoppingCart) {
         return Storage.addShoppingCard(shoppingCart);
     }
 
     @Override
-    public Optional<ShoppingCart> getShoppingCart(Long shoppingCartId) {
+    public Optional<ShoppingCart> get(Long shoppingCartId) {
         return Storage.shoppingCards.stream()
                 .filter(shoppingCart -> shoppingCart.getShoppingCartId().equals(shoppingCartId))
                 .findFirst();
@@ -25,6 +25,12 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     @Override
     public List<ShoppingCart> getAll() {
         return Storage.shoppingCards;
+    }
+
+    @Override
+    public boolean deleteById(Long id) {
+        return Storage.shoppingCards
+                .removeIf(shoppingCart -> shoppingCart.getShoppingCartId().equals(id));
     }
 
     @Override
@@ -45,9 +51,9 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     }
 
     @Override
-    public ShoppingCart getByUserId(Long userId) {
+    public Optional<ShoppingCart> getByUserId(Long userId) {
         return Storage.shoppingCards.stream()
                 .filter(cart -> cart.getUser().getUserId().equals(userId))
-                .findFirst().orElseThrow();
+                .findFirst();
     }
 }

@@ -35,12 +35,10 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public boolean deleteById(Long id) {
+        boolean result = Storage.products.stream()
+                .filter(item -> item.getProductId().equals(id)).findFirst().isEmpty();
         Storage.products.removeIf(item -> item.getProductId().equals(id));
-    }
-
-    @Override
-    public void deleteByProduct(Product product) {
-        deleteById(product.getProductId());
+        return result;
     }
 }
