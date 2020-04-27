@@ -86,7 +86,7 @@ public class MainApp {
 
     public static void generateShoppingCarts(UserService userService,
                                              ShoppingCartService shoppingCartService, int amount) {
-        generateUsers(userService, 10);
+        generateUsers(userService, amount);
 
         for (int i = 0; i < amount; i++) {
             ShoppingCart shoppingCart = new ShoppingCart(userService.get((long) i));
