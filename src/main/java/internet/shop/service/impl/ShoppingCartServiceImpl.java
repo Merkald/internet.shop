@@ -10,13 +10,12 @@ import java.util.List;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
-
     @Inject
     private ShoppingCartDao shoppingCartDao;
 
     @Override
-    public ShoppingCart getShoppingCart(Long shoppingCartId) {
-        return shoppingCartDao.getShoppingCart(shoppingCartId).orElseThrow();
+    public ShoppingCart get(Long shoppingCartId) {
+        return shoppingCartDao.get(shoppingCartId).orElseThrow();
     }
 
     @Override
@@ -25,20 +24,25 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public ShoppingCart addShoppingCart(ShoppingCart shoppingCart) {
-        return shoppingCartDao.addShoppingCart(shoppingCart);
+    public boolean deleteById(Long id) {
+        return shoppingCartDao.deleteById(id);
+    }
+
+    @Override
+    public ShoppingCart create(ShoppingCart shoppingCart) {
+        return shoppingCartDao.create(shoppingCart);
     }
 
     @Override
     public ShoppingCart addProduct(ShoppingCart shoppingCart, Product product) {
-        shoppingCartDao.getShoppingCart(shoppingCart.getShoppingCartId())
+        shoppingCartDao.get(shoppingCart.getShoppingCartId())
                 .orElseThrow().getItems().add(product);
         return shoppingCart;
     }
 
     @Override
     public boolean deleteProduct(ShoppingCart shoppingCart, Product product) {
-        return shoppingCartDao.getShoppingCart(shoppingCart.getShoppingCartId())
+        return shoppingCartDao.get(shoppingCart.getShoppingCartId())
                 .orElseThrow().getItems().add(product);
     }
 
@@ -50,15 +54,15 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public ShoppingCart getByUserId(Long userId) {
         return shoppingCartDao.getAll().stream()
-                .filter(cart -> cart.getUser().getUserId().equals(userId))
-                .findFirst().orElseThrow();
+                .filter(shoppingCart -> shoppingCart
+                        .getUser()
+                        .getUserId()
+                        .equals(userId)).findFirst()
+        .orElseThrow();
     }
 
     @Override
     public List<Product> getAllProducts(ShoppingCart shoppingCart) {
-        return shoppingCartDao.getShoppingCart(shoppingCart
-                .getShoppingCartId())
-                .orElseThrow()
-                .getItems();
+        return shoppingCartDao.get(shoppingCart.getShoppingCartId()).orElseThrow().getItems();
     }
 }

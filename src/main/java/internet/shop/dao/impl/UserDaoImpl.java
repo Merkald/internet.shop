@@ -9,7 +9,6 @@ import java.util.Optional;
 
 @Dao
 public class UserDaoImpl implements UserDao {
-
     @Override
     public User create(User user) {
         return Storage.addUser(user);
@@ -36,7 +35,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public boolean deleteById(Long id) {
+        boolean result = Storage.users.stream()
+                .filter(item -> item.getUserId().equals(id)).findFirst().isEmpty();
         Storage.users.removeIf(item -> item.getUserId().equals(id));
+        return result;
     }
 }

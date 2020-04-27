@@ -9,7 +9,6 @@ import java.util.Optional;
 
 @Dao
 public class ProductDaoImpl implements ProductDao {
-
     @Override
     public Product create(Product product) {
         return Storage.addProduct(product);
@@ -36,8 +35,10 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public boolean deleteById(Long id) {
+        boolean result = Storage.products.stream()
+                .filter(item -> item.getProductId().equals(id)).findFirst().isEmpty();
         Storage.products.removeIf(item -> item.getProductId().equals(id));
+        return result;
     }
-
 }

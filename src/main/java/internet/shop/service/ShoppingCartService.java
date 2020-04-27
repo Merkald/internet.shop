@@ -4,13 +4,8 @@ import internet.shop.model.Product;
 import internet.shop.model.ShoppingCart;
 import java.util.List;
 
-public interface ShoppingCartService {
-
-    ShoppingCart getShoppingCart(Long shoppingCartId);
-
-    List<ShoppingCart> getAll();
-
-    ShoppingCart addShoppingCart(ShoppingCart shoppingCart);
+public interface ShoppingCartService extends GenericService<ShoppingCart,Long> {
+    public ShoppingCart create(ShoppingCart shoppingCart);
 
     ShoppingCart addProduct(ShoppingCart shoppingCart, Product product);
 
