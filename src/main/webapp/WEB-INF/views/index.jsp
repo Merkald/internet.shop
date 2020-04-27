@@ -11,5 +11,20 @@
 <button type="button"
         onclick='location.href="http://localhost:8080/users/all"'>Get All Users
 </button>
+<button type="button"
+        onclick='location.href="http://localhost:8080/products/all"'>Get All Products
+</button>
+<br>
+<h3>Generators</h3>
+<br>
+<button type="button"
+        onclick='location.href="http://localhost:8080/generateUsers"'>Generate Users
+</button>
+<button type="button"
+        onclick='location.href="http://localhost:8080/generateProducts"'>Generate Products
+</button>
+<button type="button"
+        onclick='location.href="http://localhost:8080/CreateShopCart"'>Create Shopping Cart
+</button>
 </body>
 </html>
