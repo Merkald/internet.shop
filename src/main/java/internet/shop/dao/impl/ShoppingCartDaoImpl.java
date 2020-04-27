@@ -2,6 +2,7 @@ package internet.shop.dao.impl;
 
 import internet.shop.dao.ShoppingCartDao;
 import internet.shop.lib.Dao;
+import internet.shop.model.Product;
 import internet.shop.model.ShoppingCart;
 import internet.shop.storage.Storage;
 import java.util.List;
@@ -33,7 +34,6 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
                 .removeIf(shoppingCart -> shoppingCart.getShoppingCartId().equals(id));
     }
 
-    @Override
     public boolean deleteProduct(ShoppingCart shoppingCart, Product product) {
         if (Storage.shoppingCards.get(shoppingCart.getShoppingCartId().intValue())
                 .getItems().stream().filter(i -> i.equals(product)).findFirst().isEmpty()) {
