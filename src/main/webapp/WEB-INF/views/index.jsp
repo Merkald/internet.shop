@@ -26,13 +26,7 @@
 <br>
 <h3>Generators</h3>
 <button type="button"
-        onclick='location.href="/generateUsers"'>Generate Users
-</button>
-<button type="button"
-        onclick='location.href="http://localhost:8080/generateProducts"'>Generate Products
-</button>
-<button type="button"
-        onclick='location.href="http://localhost:8080/CreateShopCart"'>Create Shopping Cart
+        onclick='location.href="/InjectData"'>Inject Data
 </button>
 </body>
 </html>

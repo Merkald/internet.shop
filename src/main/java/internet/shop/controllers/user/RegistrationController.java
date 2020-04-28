@@ -11,8 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class RegistrationController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("internet.shop");
-    private UserService userService = (UserService) INJECTOR
-            .getInstance(UserService.class);
+    private UserService userService = (UserService) INJECTOR.getInstance(UserService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -31,12 +30,13 @@ public class RegistrationController extends HttpServlet {
         String password = req.getParameter("password");
         String passwordRepeat = req.getParameter("password-repeat");
         if (password.equals(passwordRepeat)) {
-            userService
-                    .create(new User(firstName, lastName, age, login, email, password));
+            userService.create(new User(firstName, lastName, age, login, email, password));
             resp.sendRedirect(req.getContextPath() + "/users/all");
         } else {
             req.setAttribute("message", "passwords are not sames!");
             req.getRequestDispatcher("/WEB-INF/views/users/registration.jsp").forward(req, resp);
         }
+        System.out.println(login + " " + firstName + " " + lastName
+                + " " + email + " " + password + " " + age);
     }
 }
