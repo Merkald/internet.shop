@@ -11,7 +11,6 @@ import internet.shop.service.UserService;
 import java.math.BigDecimal;
 
 public class MainApp {
-
     private static Injector injector = Injector.getInstance("internet.shop");
 
     public static void main(String[] args) {
