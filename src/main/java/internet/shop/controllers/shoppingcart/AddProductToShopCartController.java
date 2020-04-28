@@ -1,27 +1,28 @@
-package internet.shop.controllers.shoppingсart;
+package internet.shop.controllers.shoppingcart;
 
 import internet.shop.lib.Injector;
-import internet.shop.model.ShoppingCart;
+import internet.shop.service.ProductService;
 import internet.shop.service.ShoppingCartService;
-import internet.shop.service.UserService;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CreateShopCartController extends HttpServlet {
+public class AddProductToShopCartController extends HttpServlet {
     private static final Long USER_ID = 0L;
     private static final Injector injector = Injector.getInstance("internet.shop");
     private ShoppingCartService shoppingCartService = (ShoppingCartService) injector
             .getInstance(ShoppingCartService.class);
-    private UserService userService = (UserService) injector.getInstance(UserService.class);
+    private ProductService productService = (ProductService) injector
+            .getInstance(ProductService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        ShoppingCart shoppingCart = new ShoppingCart(userService.get(USER_ID));
-        shoppingCartService.create(shoppingCart);
-        resp.sendRedirect("http://localhost:8080/shoppingCart");
+        Long productId = Long.valueOf(req.getParameter("productId"));
+        shoppingCartService.addProduct(shoppingCartService.getByUserId(USER_ID),
+                productService.get(productId));
+        resp.sendRedirect(req.getContextPath() + "/products/all;");
     }
 }
