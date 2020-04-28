@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ProductsController extends HttpServlet {
-    private static final Injector injector = Injector.getInstance("internet.shop");
-    ProductService productService = (ProductService) injector.getInstance(ProductService.class);
+    private static final Injector INJECTOR = Injector.getInstance("internet.shop");
+    private ProductService productService = (ProductService) INJECTOR
+            .getInstance(ProductService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

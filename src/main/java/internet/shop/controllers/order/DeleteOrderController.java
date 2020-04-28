@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class DeleteOrderController extends HttpServlet {
-    private static final Injector injector = Injector.getInstance("internet.shop");
-    private OrderService orderService = (OrderService) injector
+    private static final Injector INJECTOR = Injector.getInstance("internet.shop");
+    private OrderService orderService = (OrderService) INJECTOR
             .getInstance(OrderService.class);
-    private ShoppingCartService shoppingCartService = (ShoppingCartService) injector
+    private ShoppingCartService shoppingCartService = (ShoppingCartService) INJECTOR
             .getInstance(ShoppingCartService.class);
 
     @Override
