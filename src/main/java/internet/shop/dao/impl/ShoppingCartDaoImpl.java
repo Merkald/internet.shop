@@ -10,7 +10,6 @@ import java.util.Optional;
 
 @Dao
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
-
     @Override
     public ShoppingCart create(ShoppingCart shoppingCart) {
         return Storage.addShoppingCard(shoppingCart);
