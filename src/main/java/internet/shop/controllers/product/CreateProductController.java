@@ -1,4 +1,4 @@
-package internet.shop.controllers;
+package internet.shop.controllers.product;
 
 import internet.shop.lib.Injector;
 import internet.shop.model.Product;
@@ -27,6 +27,6 @@ public class CreateProductController extends HttpServlet {
         String name = req.getParameter("name");
         BigDecimal price = BigDecimal.valueOf(Long.parseLong(req.getParameter("price")));
         productService.create(new Product(name, price));
-        resp.sendRedirect(req.getContextPath() + "/products/all");
+        resp.sendRedirect(req.getContextPath() + "/products/adminAll");
     }
 }

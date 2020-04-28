@@ -5,9 +5,12 @@
     <title>allUserOrders</title>
 </head>
 <body>
-<h1>All orders page</h1>
+<h1>All users page</h1>
 <button type="button"
         onclick='location.href="http://localhost:8080/"'>Home
+</button>
+<button type="button"
+        onclick='location.href="http://localhost:8080/registration"'>Register new User
 </button>
 <table border="1">
     <tr>
@@ -16,29 +19,19 @@
         <th>ShowOrder</th>
         <th>DeleteOrder</th>
     </tr>
-    <c:forEach var="order" items="${orders}">
+    <c:forEach var="user" items="${users}">
         <tr>
             <td>
-                <c:out value="${order.orderId}"/>
+                <c:out value="${user.userId}"/>
             </td>
             <td>
-                <c:out value="${order.user.userId}"/>
+                <c:out value="${user.firstName}"/>
             </td>
             <td>
-                <button type="button"
-                        onclick='location
-                                .href="${pageContext.request
-                                .contextPath}/OrderInfo?orderId=${order
-                                .orderId}"'>Info
-                </button>
+                <a href="${pageContext.request.contextPath}/deleteUser?userId=${user.userId}">Delete</a>
             </td>
             <td>
-                <button type="button"
-                        onclick='location
-                                .href="${pageContext.request
-                                .contextPath}/DeleteOrder?orderId=${order
-                                .orderId}"'>Delete
-                </button>
+                <a href="${pageContext.request.contextPath}/deleteUser?userId=${user.userId}">Delete</a>
             </td>
         </tr>
     </c:forEach>
