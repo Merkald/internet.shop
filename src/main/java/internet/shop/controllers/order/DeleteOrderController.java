@@ -1,27 +1,26 @@
-package internet.shop.controllers.shoppingCart;
+package internet.shop.controllers.order;
 
 import internet.shop.lib.Injector;
-import internet.shop.model.ShoppingCart;
+import internet.shop.service.OrderService;
 import internet.shop.service.ShoppingCartService;
-import internet.shop.service.UserService;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CreateShopCartController extends HttpServlet {
-    private static final Long USER_ID = 0L;
+public class DeleteOrderController extends HttpServlet {
     private static final Injector injector = Injector.getInstance("internet.shop");
+    private OrderService orderService = (OrderService) injector
+            .getInstance(OrderService.class);
     private ShoppingCartService shoppingCartService = (ShoppingCartService) injector
             .getInstance(ShoppingCartService.class);
-    UserService userService = (UserService) injector.getInstance(UserService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        ShoppingCart shoppingCart = new ShoppingCart(userService.get(USER_ID));
-        shoppingCartService.create(shoppingCart);
-        resp.sendRedirect("http://localhost:8080/shoppingCart");
+        Long id = Long.valueOf(req.getParameter("orderId"));
+        orderService.deleteById(id);
+        resp.sendRedirect(req.getContextPath() + "/orders/all");
     }
 }

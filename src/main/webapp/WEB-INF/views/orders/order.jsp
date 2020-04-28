@@ -8,9 +8,6 @@
 <button type="button"
         onclick='location.href="../../.."'>Home
 </button>
-<button type="button"
-        onclick='location.href="http://localhost:8080/orders/all"'>Back to all Orders
-</button>
 <h3>Order ID= ${order.orderId}</h3>
 <table border="1">
     <tr>

@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class OrderController extends HttpServlet {
-    private static final Injector INJECTOR = Injector.getInstance("internet.shop");
-    private OrderService orderService = (OrderService) INJECTOR.getInstance(OrderService.class);
+    private static final Injector injector = Injector.getInstance("internet.shop");
+    OrderService orderService = (OrderService) injector.getInstance(OrderService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
