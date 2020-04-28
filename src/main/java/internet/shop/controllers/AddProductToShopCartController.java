@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 public class AddProductToShopCartController extends HttpServlet {
     private static final Long USER_ID = 0L;
-    private static final Injector injector = Injector.getInstance("internet.shop");
-    private ShoppingCartService shoppingCartService = (ShoppingCartService) injector
+    private static final Injector INJECTOR = Injector.getInstance("internet.shop");
+    private ShoppingCartService shoppingCartService = (ShoppingCartService) INJECTOR
             .getInstance(ShoppingCartService.class);
-    private ProductService productService = (ProductService) injector
+    private ProductService productService = (ProductService) INJECTOR
             .getInstance(ProductService.class);
 
     @Override
