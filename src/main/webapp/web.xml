@@ -84,27 +84,11 @@
         <url-pattern>/removeProductFromShopCart</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>CreateShopCart</servlet-name>
-        <servlet-class>internet.shop.controllers.CreateShopCartController</servlet-class>
+        <servlet-name>InjectData</servlet-name>
+        <servlet-class>internet.shop.controllers.generators.InjectDataController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>CreateShopCart</servlet-name>
-        <url-pattern>/CreateShopCart</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>generateUsers</servlet-name>
-        <servlet-class>internet.shop.controllers.generators.GenerateUsersController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>generateUsers</servlet-name>
-        <url-pattern>/generateUsers</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>generateProducts</servlet-name>
-        <servlet-class>internet.shop.controllers.generators.GenerateProductsController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>generateProducts</servlet-name>
-        <url-pattern>/generateProducts</url-pattern>
+        <servlet-name>InjectData</servlet-name>
+        <url-pattern>/InjectData</url-pattern>
     </servlet-mapping>
 </web-app>
