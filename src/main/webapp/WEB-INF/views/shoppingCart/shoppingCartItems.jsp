@@ -6,10 +6,13 @@
 </head>
 <body>
 <button type="button"
-        onclick='location.href="http://localhost:8080/"'>Home
+        onclick='location.href="../../.."'>Home
 </button>
 <button type="button"
         onclick='location.href="http://localhost:8080/products/all"'>Add Product
+</button>
+<button type="button"
+        onclick='location.href="http://localhost:8080/CreateOrder?id=${userId}"'>Complete Order
 </button>
 <table border="1">
     <tr>

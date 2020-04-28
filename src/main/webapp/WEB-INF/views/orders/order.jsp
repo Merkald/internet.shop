@@ -6,18 +6,16 @@
 </head>
 <body>
 <button type="button"
-        onclick='location.href="http://localhost:8080/"'>Home
+        onclick='location.href="../../.."'>Home
 </button>
-<button type="button"
-        onclick='location.href="http://localhost:8080/products/all"'>Add Product
-</button>
+<h3>Order ID= ${order.orderId}</h3>
 <table border="1">
     <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Price</th>
     </tr>
-    <c:forEach var="product" items="${shoppingCartItems}">
+    <c:forEach var="product" items="${order.products}">
         <tr>
             <td>
                 <c:out value="${product.productId}"/>
@@ -27,9 +25,6 @@
             </td>
             <td>
                 <c:out value="${product.price}"/>
-            </td>
-            <td>
-                <a href="${pageContext.request.contextPath}/removeProductFromShopCart?productId=${product.productId}">Delete from Shopping Cart</a>
             </td>
         </tr>
     </c:forEach>

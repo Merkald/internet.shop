@@ -1,4 +1,4 @@
-package internet.shop.controllers.shoppingCart;
+package internet.shop.controllers.shoppingсart;
 
 import internet.shop.lib.Injector;
 import internet.shop.service.ProductService;

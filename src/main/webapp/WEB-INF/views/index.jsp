@@ -20,10 +20,13 @@
 <button type="button"
         onclick='location.href="http://localhost:8080/products/adminAll"'>All Products for Admin
 </button>
+<button type="button"
+        onclick='location.href="http://localhost:8080/orders/all"'>All Orders
+</button>
 <br>
 <h3>Generators</h3>
 <button type="button"
-        onclick='location.href="http://localhost:8080/generateUsers"'>Generate Users
+        onclick='location.href="/generateUsers"'>Generate Users
 </button>
 <button type="button"
         onclick='location.href="http://localhost:8080/generateProducts"'>Generate Products
