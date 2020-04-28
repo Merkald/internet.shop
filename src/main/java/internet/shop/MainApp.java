@@ -9,8 +9,6 @@ import internet.shop.service.ProductService;
 import internet.shop.service.ShoppingCartService;
 import internet.shop.service.UserService;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainApp {
 

@@ -1,4 +1,4 @@
-package internet.shop.controllers;
+package internet.shop.controllers.product;
 
 import internet.shop.lib.Injector;
 import internet.shop.service.ProductService;
@@ -17,6 +17,6 @@ public class DeleteProductController extends HttpServlet {
             throws ServletException, IOException {
         Long productId = Long.valueOf(req.getParameter("productId"));
         productService.deleteById(productId);
-        resp.sendRedirect(req.getContextPath() + "/products/all;");
+        resp.sendRedirect(req.getContextPath() + "/products/adminAll;");
     }
 }
