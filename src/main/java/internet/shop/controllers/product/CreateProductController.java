@@ -1,4 +1,4 @@
-package internet.shop.controllers;
+package internet.shop.controllers.product;
 
 import internet.shop.lib.Injector;
 import internet.shop.model.Product;
@@ -18,7 +18,7 @@ public class CreateProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/createProduct.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/products/createProduct.jsp").forward(req, resp);
     }
 
     @Override
@@ -27,6 +27,6 @@ public class CreateProductController extends HttpServlet {
         String name = req.getParameter("name");
         BigDecimal price = BigDecimal.valueOf(Long.parseLong(req.getParameter("price")));
         productService.create(new Product(name, price));
-        resp.sendRedirect(req.getContextPath() + "/products/all");
+        resp.sendRedirect(req.getContextPath() + "/products/adminAll");
     }
 }
