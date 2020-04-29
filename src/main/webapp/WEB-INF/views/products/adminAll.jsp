@@ -2,16 +2,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>allProducts</title>
+    <title>adminAll</title>
 </head>
 <body>
 <button type="button"
         onclick='location.href="http://localhost:8080/"'>Home
 </button>
 <button type="button"
-        onclick='location.href="http://localhost:8080/shoppingCart"'>Shopping Cart
+        onclick='location.href="http://localhost:8080/createProduct"'>Create Product
 </button>
-<h4 style="color:red">${productInShopCard}</h4>
 <table border="1">
     <tr>
         <th>ID</th>
@@ -33,8 +32,8 @@
                 <button type="button"
                         onclick='location
                                 .href="${pageContext.request
-                                .contextPath}/addProductToShopCart?productId=${product
-                                .productId}"'>Add to Shopping Carts
+                                .contextPath}/deleteProduct?productId=${product
+                                .productId}"'>Delete
                 </button>
             </td>
         </tr>
