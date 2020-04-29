@@ -11,6 +11,7 @@
 <button type="button"
         onclick='location.href="http://localhost:8080/shoppingCart"'>Shopping Cart
 </button>
+<h4 style="color:red">${productInShopCard}</h4>
 <table border="1">
     <tr>
         <th>ID</th>
@@ -29,7 +30,12 @@
                 <c:out value="${product.price}"/>
             </td>
             <td>
-                <a href="${pageContext.request.contextPath}/addProductToShopCart?productId=${product.productId}">Add to Shopping Cart</a>
+                <button type="button"
+                        onclick='location
+                                .href="${pageContext.request
+                                .contextPath}/addProductToShopCart?productId=${product
+                                .productId}"'>Add to Shopping Carts
+                </button>
             </td>
         </tr>
     </c:forEach>
