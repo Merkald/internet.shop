@@ -45,7 +45,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>adminAllProducts</servlet-name>
-        <servlet-class>internet.shop.controllers.product.AdminProductsController</servlet-class>
+        <servlet-class>internet.shop.controllers.product.GetProductsForAdminController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>adminAllProducts</servlet-name>
