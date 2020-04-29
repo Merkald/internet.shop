@@ -12,7 +12,7 @@
         onclick='location.href="http://localhost:8080/products/all"'>Add Product
 </button>
 <button type="button"
-        onclick='location.href="http://localhost:8080/CreateOrder?id=${userId}"'>Complete Order
+        onclick='location.href="http://localhost:8080/CreateOrder?id=${shoppingCart.shoppingCartId}"'>Complete Order
 </button>
 <table border="1">
     <tr>
@@ -20,7 +20,7 @@
         <th>Name</th>
         <th>Price</th>
     </tr>
-    <c:forEach var="product" items="${shoppingCartItems}">
+    <c:forEach var="product" items="${shoppingCart.items}">
         <tr>
             <td>
                 <c:out value="${product.productId}"/>

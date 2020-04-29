@@ -2,6 +2,7 @@ package internet.shop.controllers.order;
 
 import internet.shop.lib.Injector;
 import internet.shop.model.Order;
+import internet.shop.model.ShoppingCart;
 import internet.shop.service.OrderService;
 import internet.shop.service.ShoppingCartService;
 import java.io.IOException;
@@ -23,8 +24,8 @@ public class CreateOrderController extends HttpServlet {
         Long id = Long.valueOf(req.getParameter("id"));
         Order order = orderService
                 .completeOrder(shoppingCartService
-                                .getAllProducts(shoppingCartService.getByUserId(id)),
-                        shoppingCartService.getByUserId(id).getUser());
+                                .getAllProducts(shoppingCartService.get(id)),
+                        shoppingCartService.get(id).getUser());
         shoppingCartService.clear(shoppingCartService.get(id));
         req.setAttribute("order",order);
         req.getRequestDispatcher("/WEB-INF/views/orders/order.jsp").forward(req,resp);

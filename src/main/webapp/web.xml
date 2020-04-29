@@ -109,7 +109,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>OrderInfo</servlet-name>
-        <servlet-class>internet.shop.controllers.order.OrderInfoController</servlet-class>
+        <servlet-class>internet.shop.controllers.order.GetAllOrdersController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>OrderInfo</servlet-name>
