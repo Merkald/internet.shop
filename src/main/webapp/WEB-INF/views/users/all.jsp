@@ -51,7 +51,12 @@
                 <c:out value="${user.password}"/>
             </td>
             <td>
-                <a href="${pageContext.request.contextPath}/deleteUser?userId=${user.userId}">Delete</a>
+                <button type="button"
+                        onclick='location
+                                .href="${pageContext.request
+                                .contextPath}/deleteUser?userId=${user
+                                .userId}"'>Delete
+                </button>
             </td>
         </tr>
     </c:forEach>

@@ -26,9 +26,7 @@ public class CreateOrderController extends HttpServlet {
                                 .getAllProducts(shoppingCartService.getByUserId(id)),
                         shoppingCartService.getByUserId(id).getUser());
         shoppingCartService.clear(shoppingCartService.get(id));
-        System.out.println("List size= " + orderService.getAll().size());
         req.setAttribute("order",order);
         req.getRequestDispatcher("/WEB-INF/views/orders/order.jsp").forward(req,resp);
-        //resp.sendRedirect(req.getContextPath() + "/orders/all");
     }
 }

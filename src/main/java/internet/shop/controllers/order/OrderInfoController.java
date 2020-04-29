@@ -19,7 +19,7 @@ public class OrderInfoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        Long id = Long.valueOf(req.getParameter("id"));
+        Long id = Long.valueOf(req.getParameter("orderId"));
         req.setAttribute("order", orderService.get(id));
         req.getRequestDispatcher("/WEB-INF/views/orders/order.jsp").forward(req, resp);
     }

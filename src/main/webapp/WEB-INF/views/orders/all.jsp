@@ -25,10 +25,20 @@
                 <c:out value="${order.user.userId}"/>
             </td>
             <td>
-                <a href="${pageContext.request.contextPath}/OrderInfo?orderId=${order.orderId}">Info</a>
+                <button type="button"
+                        onclick='location
+                                .href="${pageContext.request
+                                .contextPath}/OrderInfo?orderId=${order
+                                .orderId}"'>Info
+                </button>
             </td>
             <td>
-                <a href="${pageContext.request.contextPath}/DeleteOrder?orderId=${order.orderId}">Delete</a>
+                <button type="button"
+                        onclick='location
+                                .href="${pageContext.request
+                                .contextPath}/DeleteOrder?orderId=${order
+                                .orderId}"'>Delete
+                </button>
             </td>
         </tr>
     </c:forEach>
