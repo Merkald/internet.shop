@@ -10,7 +10,6 @@ import java.util.NoSuchElementException;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-
     @Inject
     private ProductDao productDao;
 
