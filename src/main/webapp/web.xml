@@ -9,7 +9,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>index</servlet-name>
-        <url-pattern></url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>allUsers</servlet-name>
@@ -109,7 +109,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>OrderInfo</servlet-name>
-        <servlet-class>internet.shop.controllers.order.GetAllOrdersController</servlet-class>
+        <servlet-class>internet.shop.controllers.order.OrderInfoController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>OrderInfo</servlet-name>
@@ -117,7 +117,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>AllOrders</servlet-name>
-        <servlet-class>internet.shop.controllers.order.OrderController</servlet-class>
+        <servlet-class>internet.shop.controllers.order.GetAllOrdersController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AllOrders</servlet-name>
@@ -139,4 +139,12 @@
         <servlet-name>InjectData</servlet-name>
         <url-pattern>/InjectData</url-pattern>
     </servlet-mapping>
+    <filter>
+        <filter-name>authenticationFilter</filter-name>
+        <filter-class>internet.shop.web.filters.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>

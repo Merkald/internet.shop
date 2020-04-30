@@ -10,6 +10,7 @@ import internet.shop.service.UserService;
 public class AuthenticationServiceImpl implements AuthenticationService {
     @Inject
     private UserService userService;
+
     @Override
     public User login(String login, String password) throws AuthenticationExeption {
         User userFromDB = userService.findByLogin(login)

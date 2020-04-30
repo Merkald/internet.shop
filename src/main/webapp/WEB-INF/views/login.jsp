@@ -11,5 +11,11 @@
     Password <input type="password" name="password">
     <button type="submit">Login</button>
 </form>
+<button type="button"
+        onclick='location.href="http://localhost:8080/registration"'>Registration
+</button>
+<button type="button"
+        onclick='location.href="/InjectData"'>Inject Data
+</button>
 </body>
 </html>
