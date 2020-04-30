@@ -7,6 +7,7 @@ import internet.shop.model.User;
 import internet.shop.service.UserService;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -42,5 +43,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteByUser(User user) {
         return userDao.deleteById(user.getUserId());
+    }
+
+    @Override
+    public Optional<User> findByLogin(String login) {
+        return userDao.findByLogin(login);
     }
 }
