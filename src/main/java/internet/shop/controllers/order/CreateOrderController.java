@@ -28,7 +28,7 @@ public class CreateOrderController extends HttpServlet {
                                 .getAllProducts(shoppingCart),
                         shoppingCart.getUser());
         shoppingCartService.clear(shoppingCart);
-        req.setAttribute("order",order);
-        req.getRequestDispatcher("/WEB-INF/views/orders/order.jsp").forward(req,resp);
+        req.setAttribute("order", order);
+        req.getRequestDispatcher("/WEB-INF/views/orders/order.jsp").forward(req, resp);
     }
 }
