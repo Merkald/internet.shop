@@ -5,7 +5,7 @@
 </head>
 <body>
 <button type="button"
-        onclick='location.href="http://localhost:8080/"'>Home
+        onclick='location.href="../../.."'>Home
 </button>
 <button type="button"
         onclick='location.href="http://localhost:8080/products/all"'>Back to all Products

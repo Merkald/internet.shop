@@ -2,14 +2,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Shopping Cart Items</title>
+    <title>adminAll</title>
 </head>
 <body>
 <button type="button"
         onclick='location.href="http://localhost:8080/"'>Home
 </button>
 <button type="button"
-        onclick='location.href="http://localhost:8080/products/all"'>Add Product
+        onclick='location.href="http://localhost:8080/createProduct"'>Create Product
 </button>
 <table border="1">
     <tr>
@@ -17,7 +17,7 @@
         <th>Name</th>
         <th>Price</th>
     </tr>
-    <c:forEach var="product" items="${shoppingCartItems}">
+    <c:forEach var="product" items="${products}">
         <tr>
             <td>
                 <c:out value="${product.productId}"/>
@@ -29,7 +29,12 @@
                 <c:out value="${product.price}"/>
             </td>
             <td>
-                <a href="${pageContext.request.contextPath}/removeProductFromShopCart?productId=${product.productId}">Delete from Shopping Cart</a>
+                <button type="button"
+                        onclick='location
+                                .href="${pageContext.request
+                                .contextPath}/deleteProduct?productId=${product
+                                .productId}"'>Delete
+                </button>
             </td>
         </tr>
     </c:forEach>
