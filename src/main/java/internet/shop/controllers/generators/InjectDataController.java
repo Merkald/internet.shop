@@ -28,6 +28,8 @@ public class InjectDataController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         generateItems(productService, 10);
+        userService.create(new User("q",
+                "q", 1, "q", "q", "q"));
         generateUsers(userService, 10);
         ShoppingCart shoppingCart = new ShoppingCart(userService.get(USER_ID));
         shoppingCartService.create(shoppingCart);
