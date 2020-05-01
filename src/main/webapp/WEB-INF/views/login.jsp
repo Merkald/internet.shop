@@ -12,38 +12,39 @@
 <br>
 <br>
 <br>
-<div class="mx-auto my-auto" style="width: 500px; height: 200px;">
-    <h1 class="mx-auto" style="width: 200px;">Login Page</h1>
-    <h6 class="mx-auto" style="width: 310px;">
-        If you doesnt have account please
-        <a href="http://localhost:8080/registration">Register</a>
-    </h6>
-    <form action="${pageContext.request.contextPath}/login"
-          method="post"
-          class="w-30 p-4">
-        <div class="form-group">
-            <label>Login</label>
-            <input type="text"
-                   class="form-control"
-                   aria-describedby="emailHelp"
-                   name="login">
-        </div>
-        <div class="form-group">
-            <label class="mx-auto">Password</label>
-            <input type="password"
-                   class="form-control"
-                   name="password">
-        </div>
-        <div class="mx-auto" style="width: 230px;">
-            <h6 style="width: 300px; color:red">${errorMessage}</h6>
-        </div>
-        <div class="mx-auto my-5" style="width: 200px;">
-            <button type="submit" class="btn btn-primary"
-                    style="width: 200px;">Submit
-            </button>
-        </div>
-
-    </form>
+<br>
+<div class="card text-white bg-success mx-auto my-auto" style="width: 500px;">
+    <div class="card-header">
+        <h1 class="mx-auto" style="width: 200px;">Login Page</h1>
+    </div>
+    <div class="card-body">
+        <h6 class="mx-auto" style="width: 260px;">If you doesnt have account
+            <a href="http://localhost:8080/registration">Register</a>
+        </h6>
+        <form action="${pageContext.request.contextPath}/login"
+              method="post">
+            <div class="card-body form-group">
+                <label>Login</label>
+                <input type="text"
+                       class="form-control"
+                       aria-describedby="emailHelp"
+                       name="login">
+            </div>
+            <div class="card-body form-group">
+                <label class="mx-auto">Password</label>
+                <input type="password"
+                       class="form-control"
+                       name="password">
+            </div>
+            <div class="mx-auto" role="alert" style="width: 230px;">
+                <h6 style="width: 300px; color:red">${errorMessage}</h6>
+            </div>
+            <div class="mx-auto my-5" style="width: 200px;">
+                <button type="submit" class="btn btn-primary btn-lg" style="width: 200px;">Submit
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
