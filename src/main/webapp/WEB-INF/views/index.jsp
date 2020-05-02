@@ -14,17 +14,20 @@
     <div class="card">
         <div class="card-header bg-dark" id="headingOne">
             <h5 class="mb-0">
-                <button class="btn btn-link btn-warning mx-auto" style="width: 560px;" data-toggle="collapse" data-target="#collapseOne"
+                <button class="btn btn-link btn-secondary mx-auto text-white" style="width: 560px;" data-toggle="collapse" data-target="#collapseOne"
                         aria-expanded="true" aria-controls="collapseOne">
                     User Options
                 </button>
             </h5>
         </div>
 
-        <div id="collapseOne" class="collapse show bg-success" aria-labelledby="headingOne" data-parent="#accordion">
+        <div id="collapseOne" class="collapse show bg-dark" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
                 <button type="button" class="btn btn-primary"
                         onclick='location.href="http://localhost:8080/registration"'>Registration
+                </button>
+                <button type="button" class="btn btn-primary"
+                        onclick='location.href="http://localhost:8080/login"'>Login
                 </button>
                 <button type="button" class="btn btn-primary"
                         onclick='location.href="http://localhost:8080/products/all"'>All Products for User
@@ -35,13 +38,13 @@
     <div class="card">
         <div class="card-header bg-dark" id="headingTwo">
             <h5 class="mb-0">
-                <button class="btn btn-link collapsed btn-warning mx-auto" style="width: 560px;" data-toggle="collapse" data-target="#collapseTwo"
+                <button class="btn btn-link collapsed btn-secondary mx-auto text-white" style="width: 560px;" data-toggle="collapse" data-target="#collapseTwo"
                         aria-expanded="false" aria-controls="collapseTwo">
                     Admin Options
                 </button>
             </h5>
         </div>
-        <div id="collapseTwo" class="collapse bg-success" aria-labelledby="headingTwo" data-parent="#accordion">
+        <div id="collapseTwo" class="collapse bg-dark" aria-labelledby="headingTwo" data-parent="#accordion">
             <div class="card-body">
                 <button type="button" class="btn btn-primary"
                         onclick='location.href="http://localhost:8080/users/all"'>Get All Users
@@ -59,13 +62,13 @@
     <div class="card">
         <div class="card-header bg-dark" id="headingThree">
             <h5 class="mb-0">
-                <button class="btn btn-link collapsed btn-warning mx-auto" style="width: 560px;" data-toggle="collapse" data-target="#collapseThree"
+                <button class="btn btn-link collapsed btn-secondary mx-auto text-white" style="width: 560px;" data-toggle="collapse" data-target="#collapseThree"
                         aria-expanded="false" aria-controls="collapseThree">
                     Generators
                 </button>
             </h5>
         </div>
-        <div id="collapseThree" class="collapse bg-success" aria-labelledby="headingThree" data-parent="#accordion">
+        <div id="collapseThree" class="collapse bg-dark" aria-labelledby="headingThree" data-parent="#accordion">
             <div class="card-body">
                 <button type="button" class="btn btn-primary"
                         onclick='location.href="/InjectData"'>Inject Data

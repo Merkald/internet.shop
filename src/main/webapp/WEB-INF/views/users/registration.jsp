@@ -5,7 +5,7 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Registration</title>
 </head>
-<body class="bg-success">
+<body class="bg-dark">
 <button type="button" class="btn btn-secondary"
         onclick='location.href="../../.."'>Home
 </button>

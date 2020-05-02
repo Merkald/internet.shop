@@ -7,6 +7,9 @@
 </head>
 <body class="bg-secondary">
 <button type="button" class="btn btn-dark"
+        onclick='location.href="http://localhost:8080/"'>Home
+</button>
+<button type="button" class="btn btn-warning"
         onclick='location.href="/InjectData"'>Inject Data
 </button>
 <br>
