@@ -47,7 +47,7 @@ public class MainApp {
             addLotOfProducts(i, i, shoppingCartService, productService);
             orderService.completeOrder(shoppingCartService
                     .get((long) i)
-                    .getItems(), userService.get((long) i));
+                    .getProducts(), userService.get((long) i));
             shoppingCartService.clear(shoppingCartService.get((long) i));
         }
     }

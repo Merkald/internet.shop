@@ -36,14 +36,14 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public ShoppingCart addProduct(ShoppingCart shoppingCart, Product product) {
         shoppingCartDao.get(shoppingCart.getShoppingCartId())
-                .orElseThrow().getItems().add(product);
+                .orElseThrow().getProducts().add(product);
         return shoppingCart;
     }
 
     @Override
     public boolean deleteProduct(ShoppingCart shoppingCart, Product product) {
         return shoppingCartDao.get(shoppingCart.getShoppingCartId())
-                .orElseThrow().getItems().remove(product);
+                .orElseThrow().getProducts().remove(product);
     }
 
     @Override
@@ -63,6 +63,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public List<Product> getAllProducts(ShoppingCart shoppingCart) {
-        return shoppingCartDao.get(shoppingCart.getShoppingCartId()).orElseThrow().getItems();
+        return shoppingCartDao.get(shoppingCart.getShoppingCartId()).orElseThrow().getProducts();
     }
 }
