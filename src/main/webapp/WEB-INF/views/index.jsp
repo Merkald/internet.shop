@@ -35,6 +35,9 @@
                 <button type="button" class="btn btn-primary"
                         onclick='location.href="http://localhost:8080/orders/userAll"'>All Orders for User
                 </button>
+                <button type="button" class="btn btn-primary"
+                        onclick='location.href="http://localhost:8080/logout"'>Logout
+                </button>
             </div>
         </div>
     </div>
