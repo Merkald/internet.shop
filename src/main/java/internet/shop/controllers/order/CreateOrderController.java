@@ -26,8 +26,7 @@ public class CreateOrderController extends HttpServlet {
         Long userId = (Long) req.getSession().getAttribute(USER_ID);
         ShoppingCart shoppingCart = shoppingCartService.getByUserId(userId);
         Order order = orderService
-                .completeOrder(shoppingCartService
-                                .getAllProducts(shoppingCart),
+                .completeOrder(shoppingCart.getProducts(),
                         shoppingCart.getUser());
         shoppingCartService.clear(shoppingCart);
         req.setAttribute("order", order);

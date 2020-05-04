@@ -69,7 +69,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>shoppingCart</servlet-name>
-        <servlet-class>internet.shop.controllers.shoppingcart.ShoppingCartController</servlet-class>
+        <servlet-class>internet.shop.controllers.shoppingcart.ShoppingCartInfoController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>shoppingCart</servlet-name>
@@ -133,11 +133,11 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>UserAllOrders</servlet-name>
-        <servlet-class>internet.shop.controllers.order.AllUserOrdersController</servlet-class>
+        <servlet-class>internet.shop.controllers.order.GetUserOrdersController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserAllOrders</servlet-name>
-        <url-pattern>/orders/userAll</url-pattern>
+        <url-pattern>/users/orders</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>Logout</servlet-name>
