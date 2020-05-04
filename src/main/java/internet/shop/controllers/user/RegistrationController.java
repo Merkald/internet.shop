@@ -1,7 +1,9 @@
 package internet.shop.controllers.user;
 
 import internet.shop.lib.Injector;
+import internet.shop.model.ShoppingCart;
 import internet.shop.model.User;
+import internet.shop.service.ShoppingCartService;
 import internet.shop.service.UserService;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -12,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 public class RegistrationController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("internet.shop");
     private UserService userService = (UserService) INJECTOR.getInstance(UserService.class);
+    private ShoppingCartService shoppingCartService = (ShoppingCartService) INJECTOR
+            .getInstance(ShoppingCartService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -30,7 +34,9 @@ public class RegistrationController extends HttpServlet {
         String password = req.getParameter("password");
         String passwordRepeat = req.getParameter("password-repeat");
         if (password.equals(passwordRepeat)) {
-            userService.create(new User(firstName, lastName, age, login, email, password));
+            User user = userService
+                    .create(new User(firstName, lastName, age, login, email, password));
+            shoppingCartService.create(new ShoppingCart(user));
             resp.sendRedirect(req.getContextPath() + "/users/all");
         } else {
             req.setAttribute("message", "passwords are not sames!");

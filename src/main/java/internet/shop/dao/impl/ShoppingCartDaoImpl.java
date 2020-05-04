@@ -35,17 +35,17 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 
     public boolean deleteProduct(ShoppingCart shoppingCart, Product product) {
         if (Storage.shoppingCards.get(shoppingCart.getShoppingCartId().intValue())
-                .getItems().stream().filter(i -> i.equals(product)).findFirst().isEmpty()) {
+                .getProducts().stream().filter(i -> i.equals(product)).findFirst().isEmpty()) {
             return false;
         }
         Storage.shoppingCards.get(shoppingCart.getShoppingCartId()
-                .intValue()).getItems().remove(product);
+                .intValue()).getProducts().remove(product);
         return true;
     }
 
     @Override
     public void clear(ShoppingCart shoppingCart) {
         Storage.shoppingCards
-                .get(shoppingCart.getShoppingCartId().intValue()).getItems().clear();
+                .get(shoppingCart.getShoppingCartId().intValue()).getProducts().clear();
     }
 }

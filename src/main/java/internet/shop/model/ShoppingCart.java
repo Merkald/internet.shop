@@ -22,7 +22,7 @@ public class ShoppingCart {
         return shoppingCartId;
     }
 
-    public List<Product> getItems() {
+    public List<Product> getProducts() {
         return items;
     }
 
@@ -48,13 +48,13 @@ public class ShoppingCart {
         }
         ShoppingCart shoppingCart = (ShoppingCart) o;
         return getShoppingCartId().equals(shoppingCart.getShoppingCartId())
-                && getItems().equals(shoppingCart.getItems())
+                && getProducts().equals(shoppingCart.getProducts())
                 && getUser().equals(shoppingCart.getUser());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getShoppingCartId(), getItems(), getUser());
+        return Objects.hash(getShoppingCartId(), getProducts(), getUser());
     }
 
     @Override

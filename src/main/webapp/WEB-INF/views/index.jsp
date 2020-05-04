@@ -32,6 +32,9 @@
                 <button type="button" class="btn btn-primary"
                         onclick='location.href="http://localhost:8080/products/all"'>All Products for User
                 </button>
+                <button type="button" class="btn btn-primary"
+                        onclick='location.href="http://localhost:8080/users/orders"'>All Orders for User
+                </button>
             </div>
         </div>
     </div>
