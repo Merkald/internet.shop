@@ -4,32 +4,43 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Order</title>
+    <title>userAll</title>
 </head>
 <body class="bg-dark">
 <button type="button" class="btn btn-secondary"
-        onclick='location.href="../../.."'>Home
+        onclick='location.href="http://localhost:8080/"'>Home
 </button>
-<button type="button" class="btn bg-success"
-        onclick='location.href="http://localhost:8080/orders/userAll"'>Back to all Orders
-</button>
-<h3 class="mx-auto" style="color: white">Order ID= ${order.orderId}</h3>
+<h1 style="color: white">All orders for "${user.firstName} ${user.lastName}"</h1>
 <table border="1" class="table table-striped table-dark">
     <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Price</th>
+        <th>OrderId</th>
+        <th>UserId</th>
+        <th>ShowOrder</th>
+        <th>DeleteOrder</th>
     </tr>
-    <c:forEach var="product" items="${order.products}">
+    <c:forEach var="order" items="${userOrders}">
         <tr>
             <td>
-                <c:out value="${product.productId}"/>
+                <c:out value="${order.orderId}"/>
             </td>
             <td>
-                <c:out value="${product.name}"/>
+                <c:out value="${order.user.userId}"/>
             </td>
             <td>
-                <c:out value="${product.price}"/>
+                <button type="button" class="btn btn-primary"
+                        onclick='location
+                                .href="${pageContext.request
+                                .contextPath}/OrderInfo?orderId=${order
+                                .orderId}"'>Info
+                </button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger"
+                        onclick='location
+                                .href="${pageContext.request
+                                .contextPath}/DeleteOrder?orderId=${order
+                                .orderId}"'>Delete
+                </button>
             </td>
         </tr>
     </c:forEach>
