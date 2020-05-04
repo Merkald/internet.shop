@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class CreateOrderController extends HttpServlet {
+    private static final Long USER_ID = 0L;
     private static final Injector INJECTOR = Injector.getInstance("internet.shop");
     private OrderService orderService = (OrderService) INJECTOR
             .getInstance(OrderService.class);
@@ -22,7 +23,7 @@ public class CreateOrderController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         Long id = Long.valueOf(req.getParameter("id"));
-        ShoppingCart shoppingCart = shoppingCartService.get(id);
+        ShoppingCart shoppingCart = shoppingCartService.getByUserId(USER_ID);
         Order order = orderService
                 .completeOrder(shoppingCartService
                                 .getAllProducts(shoppingCart),

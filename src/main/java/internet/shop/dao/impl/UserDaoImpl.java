@@ -35,6 +35,11 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public Optional<User> findByLogin(String login) {
+        return Storage.users.stream().filter(s -> s.getLogin().equals(login)).findFirst();
+    }
+
+    @Override
     public boolean deleteById(Long id) {
         boolean result = Storage.users.stream()
                 .filter(item -> item.getUserId().equals(id)).findFirst().isEmpty();

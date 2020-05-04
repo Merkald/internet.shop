@@ -41,6 +41,8 @@ public class InjectDataController extends HttpServlet {
     }
 
     private void generateUsers(UserService userService, int amount) {
+        userService.create(new User("q",
+                "q", 1, "q", "q", "q"));
         for (int i = 0; i < amount; i++) {
             String firstName = new StringBuilder("Name ").append(i).toString();
             String lastName = new StringBuilder("Family ").append(i).toString();
