@@ -16,7 +16,7 @@
         </th>
         <th style="width: 300px;">
             <button type="button" class="btn bg-success"
-                    onclick='location.href="http://localhost:8080/shoppingCart"'>Shopping Cart
+                    onclick='location.href="http://localhost:8080/shoppingCart/allProducts"'>Shopping Cart
             </button>
         </th>
         <th>
@@ -46,7 +46,7 @@
                 <button type="button" class="btn btn-primary"
                         onclick='location
                                 .href="${pageContext.request
-                                .contextPath}/addProductToShopCart?productId=${product
+                                .contextPath}/shoppingCart/addProduct?productId=${product
                                 .productId}"'>Add to Shopping Carts
                 </button>
             </td>

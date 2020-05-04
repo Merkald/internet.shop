@@ -14,7 +14,7 @@
         onclick='location.href="http://localhost:8080/products/all"'>Add Product
 </button>
 <button type="button" class="btn btn-primary"
-        onclick='location.href="http://localhost:8080/CreateOrder?id=${shoppingCart.shoppingCartId}"'>Complete Order
+        onclick='location.href="http://localhost:8080/orders/CreateOrder?id=${shoppingCart.shoppingCartId}"'>Complete Order
 </button>
 <h1 style="color: white">Shopping Cart</h1>
 <table border="1" class="table table-striped table-dark">
@@ -38,7 +38,7 @@
                 <button type="button" class="btn btn-danger"
                         onclick='location
                                 .href="${pageContext.request
-                                .contextPath}/removeProductFromShopCart?productId=${product
+                                .contextPath}/shoppingCart/removeProduct?productId=${product
                                 .productId}"'>Delete from Shopping Cart
                 </button>
             </td>

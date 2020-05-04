@@ -30,7 +30,7 @@
                 <button type="button" class="btn btn-primary"
                         onclick='location
                                 .href="${pageContext.request
-                                .contextPath}/OrderInfo?orderId=${order
+                                .contextPath}/orders/OrderInfo?orderId=${order
                                 .orderId}"'>Info
                 </button>
             </td>
@@ -38,7 +38,7 @@
                 <button type="button" class="btn btn-danger"
                         onclick='location
                                 .href="${pageContext.request
-                                .contextPath}/DeleteOrder?orderId=${order
+                                .contextPath}/orders/DeleteOrder?orderId=${order
                                 .orderId}"'>Delete
                 </button>
             </td>

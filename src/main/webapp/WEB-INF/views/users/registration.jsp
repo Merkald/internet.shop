@@ -22,7 +22,7 @@
         <h3 class="mx-auto" style="width: 320px;">Provide your user details.</h3>
     </div>
     <div class="card-body">
-        <form method="post" action="${pageContext.request.contextPath}/registration">
+        <form method="post" action="${pageContext.request.contextPath}/users/registration">
             <div class="input-group flex-nowrap">
                 <div class="input-group-prepend">
                     <span class="input-group-text" style="width: 140px;">First name</span>

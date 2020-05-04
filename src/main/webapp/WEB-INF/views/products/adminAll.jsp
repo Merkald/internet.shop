@@ -24,7 +24,7 @@
         <div id="collapseOne" class="collapse bg-dark" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
                 <h1 class="mx-auto" style="color: chartreuse; width: 450px;">Provide Product details</h1>
-                <form method="post" action="${pageContext.request.contextPath}/createProduct">
+                <form method="post" action="${pageContext.request.contextPath}/products/createProduct">
                     <table class="table table-striped table-dark">
                         <tr>
                             <th>
@@ -75,7 +75,7 @@
                 <button type="button" class="btn btn-danger"
                         onclick='location
                                 .href="${pageContext.request
-                                .contextPath}/deleteProduct?productId=${product
+                                .contextPath}/products/deleteProduct?productId=${product
                                 .productId}"'>Delete
                 </button>
             </td>
