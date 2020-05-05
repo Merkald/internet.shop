@@ -7,6 +7,9 @@
     <title>Shopping Cart Items</title>
 </head>
 <body class="bg-dark">
+<div class="bg-success">
+    <%@include file="/WEB-INF/views/users/userDetails.jsp" %>
+</div>
 <button type="button" class="btn btn-secondary"
         onclick='location.href="../../.."'>Home
 </button>
@@ -23,7 +26,7 @@
         <th class="mx-auto" style="width: 400px;">Name</th>
         <th class="mx-auto" style="width: 400px;">Price</th>
     </tr>
-    <c:forEach var="product" items="${shoppingCart}">
+    <c:forEach var="product" items="${shoppingCartProducts}">
         <tr>
             <td>
                 <c:out value="${product.productId}"/>

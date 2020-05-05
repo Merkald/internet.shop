@@ -6,7 +6,17 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>userDetails</title>
 </head>
-<body>
-<h1>Include</h1>
+<body class="bg-dark">
+<button type="button" class="btn btn-primary"
+        onclick='location.href="http://localhost:8080/users/logout"'>Logout
+</button>
+    <h5>${sessionScope.user.firstName} ${sessionScope.user.lastName}</h5>
+    <c:forEach var="role" items="${sessionScope.user.roles}">
+        <tr>
+            <td>
+                <c:out value="Role_name: ${role.roleName}"/>
+            </td>
+        </tr>
+    </c:forEach>
 </body>
 </html>

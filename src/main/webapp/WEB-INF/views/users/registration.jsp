@@ -6,12 +6,6 @@
     <title>Registration</title>
 </head>
 <body class="bg-dark">
-<button type="button" class="btn btn-secondary"
-        onclick='location.href="../../.."'>Home
-</button>
-<button type="button" class="btn btn-danger"
-        onclick='location.href="http://localhost:8080/users/all"'>Back to all Users
-</button>
 <br>
 <br>
 <br>
@@ -20,6 +14,9 @@
     <div class="card-header">
         <h1 class="mx-auto" style="width: 120px;">Hello!</h1>
         <h3 class="mx-auto" style="width: 320px;">Provide your user details.</h3>
+        <h6 class="mx-auto" style="width: 260px;">If you already have account
+            <a href="http://localhost:8080/users/login">Login</a>
+        </h6>
     </div>
     <div class="card-body">
         <form method="post" action="${pageContext.request.contextPath}/users/registration">
@@ -66,9 +63,9 @@
                 <input type="password" name="password-repeat" style="width: 500px;">
             </div>
             <h4 style="color:red">${message}</h4>
-            <div class="mx-auto my-3" style="width: 100px;">
-                <button class="btn btn-primary btn-lg" type="submit">Register</button>
-            </div>
+                <div class="mx-auto my-3" style="width: 100px;">
+                    <button class="btn btn-primary btn-lg" type="submit">Register</button>
+                </div>
         </form>
     </div>
 </div>

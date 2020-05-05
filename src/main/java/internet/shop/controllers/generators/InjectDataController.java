@@ -40,9 +40,14 @@ public class InjectDataController extends HttpServlet {
     }
 
     private void generateUsers(UserService userService, int amount) {
-        User user = new User("q",
-                "q", 1, "q", "q", "q");
+        User user = new User("Boris",
+                "Britva", 1, "q", "q", "q");
         user.setRole(Set.of(Role.of("ADMIN")));
+        userService.create(user);
+        shoppingCartService.create(new ShoppingCart(user));
+        user = new User("Petro",
+                "Kowbasa", 1, "w", "q", "w");
+        user.setRole(Set.of(Role.of("USER")));
         userService.create(user);
         shoppingCartService.create(new ShoppingCart(user));
         for (int i = 0; i < amount; i++) {

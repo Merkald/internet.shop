@@ -7,6 +7,9 @@
     <title>userAll</title>
 </head>
 <body class="bg-dark">
+<div class="bg-success">
+    <%@include file="/WEB-INF/views/users/userDetails.jsp" %>
+</div>
 <button type="button" class="btn btn-secondary"
         onclick='location.href="http://localhost:8080/"'>Home
 </button>
@@ -16,7 +19,6 @@
         <th>OrderId</th>
         <th>UserId</th>
         <th>ShowOrder</th>
-        <th>DeleteOrder</th>
     </tr>
     <c:forEach var="order" items="${userOrders}">
         <tr>
@@ -32,14 +34,6 @@
                                 .href="${pageContext.request
                                 .contextPath}/orders/OrderInfo?orderId=${order
                                 .orderId}"'>Info
-                </button>
-            </td>
-            <td>
-                <button type="button" class="btn btn-danger"
-                        onclick='location
-                                .href="${pageContext.request
-                                .contextPath}/orders/DeleteOrder?orderId=${order
-                                .orderId}"'>Delete
                 </button>
             </td>
         </tr>

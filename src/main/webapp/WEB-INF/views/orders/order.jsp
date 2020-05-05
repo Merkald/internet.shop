@@ -7,11 +7,11 @@
     <title>Order</title>
 </head>
 <body class="bg-dark">
+<div class="bg-success">
+    <%@include file="/WEB-INF/views/users/userDetails.jsp" %>
+</div>
 <button type="button" class="btn btn-secondary"
         onclick='location.href="../../.."'>Home
-</button>
-<button type="button" class="btn bg-success"
-        onclick='location.href="http://localhost:8080/orders/userAll"'>Back to all Orders
 </button>
 <h3 class="mx-auto" style="color: white">Order ID= ${order.orderId}</h3>
 <table border="1" class="table table-striped table-dark">

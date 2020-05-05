@@ -7,6 +7,9 @@
     <title>allProducts</title>
 </head>
 <body class="bg-dark">
+<div class="bg-success">
+    <%@include file="/WEB-INF/views/users/userDetails.jsp" %>
+</div>
 <table>
     <tr>
         <th>
