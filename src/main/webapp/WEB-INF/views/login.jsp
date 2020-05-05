@@ -10,7 +10,7 @@
         onclick='location.href="http://localhost:8080/"'>Home
 </button>
 <button type="button" class="btn btn-warning"
-        onclick='location.href="/InjectData"'>Inject Data
+        onclick='location.href="/injectData"'>Inject Data
 </button>
 <br>
 <br>

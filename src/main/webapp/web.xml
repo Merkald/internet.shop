@@ -33,7 +33,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>deleteUser</servlet-name>
-        <url-pattern>/users/deleteUser</url-pattern>
+        <url-pattern>/users/delete</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>allProducts</servlet-name>
@@ -57,7 +57,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>createProduct</servlet-name>
-        <url-pattern>/products/createProduct</url-pattern>
+        <url-pattern>/products/create</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>deleteProduct</servlet-name>
@@ -65,7 +65,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>deleteProduct</servlet-name>
-        <url-pattern>/products/deleteProduct</url-pattern>
+        <url-pattern>/products/delete</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>shoppingCart</servlet-name>
@@ -97,7 +97,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>CreateOrder</servlet-name>
-        <url-pattern>/orders/CreateOrder</url-pattern>
+        <url-pattern>/orders/Create</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>DeleteOrder</servlet-name>
@@ -154,7 +154,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>InjectData</servlet-name>
-        <url-pattern>/InjectData</url-pattern>
+        <url-pattern>/injectData</url-pattern>
     </servlet-mapping>
     <filter>
         <filter-name>authenticationFilter</filter-name>

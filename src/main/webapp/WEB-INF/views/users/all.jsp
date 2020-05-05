@@ -56,7 +56,7 @@
                 <button type="button" class="btn btn-danger"
                         onclick='location
                                 .href="${pageContext.request
-                                .contextPath}/users/deleteUser?userId=${user
+                                .contextPath}/users/delete?userId=${user
                                 .userId}"'>Delete
                 </button>
             </td>

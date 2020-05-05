@@ -78,7 +78,7 @@
         <div id="collapseThree" class="collapse bg-dark" aria-labelledby="headingThree" data-parent="#accordion">
             <div class="card-body">
                 <button type="button" class="btn btn-primary"
-                        onclick='location.href="/InjectData"'>Inject Data
+                        onclick='location.href="/injectData"'>Inject Data
                 </button>
             </div>
         </div>
