@@ -5,7 +5,7 @@ public class Role {
     private RoleName roleName;
 
     private Role(RoleName roleName) {
-        this.roleName=roleName;
+        this.roleName = roleName;
     }
 
     public static Role of(String roleName) {
