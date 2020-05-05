@@ -1,6 +1,7 @@
 package internet.shop.controllers.shoppingcart;
 
 import internet.shop.lib.Injector;
+import internet.shop.model.ShoppingCart;
 import internet.shop.service.ProductService;
 import internet.shop.service.ShoppingCartService;
 import java.io.IOException;
@@ -21,9 +22,10 @@ public class ShoppingCartInfoController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         Long userId = (Long) req.getSession().getAttribute(USER_ID);
+        ShoppingCart shoppingCart = shoppingCartService.getByUserId(userId);
         req.setAttribute("shoppingCartId",
-                shoppingCartService.getByUserId(userId).getShoppingCartId());
-        req.setAttribute("shoppingCart", shoppingCartService.getByUserId(userId).getProducts());
+                shoppingCart.getShoppingCartId());
+        req.setAttribute("shoppingCart", shoppingCart.getProducts());
         req.getRequestDispatcher("/WEB-INF/views/shoppingCart/shoppingCartItems.jsp")
                 .forward(req, resp);
     }
