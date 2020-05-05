@@ -21,7 +21,17 @@ public class AutorizationFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         protectedUrls.put("/users/all",List.of(Role.RoleName.ADMIN));
+        protectedUrls.put("/users/deleteUser",List.of(Role.RoleName.ADMIN));
+        protectedUrls.put("/products/adminAll",List.of(Role.RoleName.ADMIN));
+        protectedUrls.put("/products/createProduct",List.of(Role.RoleName.ADMIN));
+        protectedUrls.put("/products/deleteProduct",List.of(Role.RoleName.ADMIN));
+        protectedUrls.put("/orders/all",List.of(Role.RoleName.ADMIN));
         protectedUrls.put("/orders/CreateOrder",List.of(Role.RoleName.USER));
+        protectedUrls.put("/products/all",List.of(Role.RoleName.USER));
+        protectedUrls.put("/shoppingCart/allProducts",List.of(Role.RoleName.USER));
+        protectedUrls.put("/shoppingCart/addProduct",List.of(Role.RoleName.USER));
+        protectedUrls.put("/shoppingCart/removeProduct",List.of(Role.RoleName.USER));
+        protectedUrls.put("/users/orders",List.of(Role.RoleName.USER));
     }
 
     @Override
@@ -32,18 +42,13 @@ public class AutorizationFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
         String url = req.getServletPath();
-        if (protectedUrls.get(req) == null) {
+        if (protectedUrls.get(url) == null) {
             filterChain.doFilter(req, resp);
             return;
         }
         Long userId = (Long) req.getSession().getAttribute(USER_ID);
-        if (userId == null || userService.get(userId) == null) {
-            resp.sendRedirect("/users/login");
-            return;
-        }
         User user = userService.get(userId);
         if (isAuthorized(user,protectedUrls.get(url))) {
-
             filterChain.doFilter(req,resp);
             return;
         } else {
@@ -60,7 +65,7 @@ public class AutorizationFilter implements Filter {
     private boolean isAuthorized(User user, List<Role.RoleName> authorizedRoles) {
         for (Role.RoleName autorizedRole: authorizedRoles) {
             for (Role userRole: user.getRoles()) {
-                if (authorizedRoles.equals(userRole.getRoleName())) {
+                if (autorizedRole.equals(userRole.getRoleName())) {
                     return true;
                 }
             }

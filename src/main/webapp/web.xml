@@ -163,4 +163,12 @@
         <filter-name>authenticationFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <filter>
+        <filter-name>autorizationFilter</filter-name>
+        <filter-class>internet.shop.web.filters.AutorizationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>autorizationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>
