@@ -17,7 +17,7 @@
         onclick='location.href="http://localhost:8080/products/all"'>Add Product
 </button>
 <button type="button" class="btn btn-primary"
-        onclick='location.href="http://localhost:8080/orders/Create?id=${shoppingCartId}"'>Complete Order
+        onclick='location.href="http://localhost:8080/orders/create?id=${shoppingCartId}"'>Complete Order
 </button>
 <h1 style="color: white">Shopping Cart</h1>
 <table border="1" class="table table-striped table-dark">

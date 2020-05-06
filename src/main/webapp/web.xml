@@ -97,7 +97,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>CreateOrder</servlet-name>
-        <url-pattern>/orders/Create</url-pattern>
+        <url-pattern>/orders/create</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>DeleteOrder</servlet-name>
