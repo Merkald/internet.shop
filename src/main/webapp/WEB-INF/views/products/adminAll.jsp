@@ -7,6 +7,9 @@
     <title>adminAll</title>
 </head>
 <body class="bg-dark">
+<div class="bg-success">
+    <%@include file="/WEB-INF/views/users/userDetails.jsp" %>
+</div>
 <button type="button" class="btn btn-secondary"
         onclick='location.href="http://localhost:8080/"'>Home
 </button>
@@ -24,7 +27,7 @@
         <div id="collapseOne" class="collapse bg-dark" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
                 <h1 class="mx-auto" style="color: chartreuse; width: 450px;">Provide Product details</h1>
-                <form method="post" action="${pageContext.request.contextPath}/createProduct">
+                <form method="post" action="${pageContext.request.contextPath}/products/create">
                     <table class="table table-striped table-dark">
                         <tr>
                             <th>
@@ -75,7 +78,7 @@
                 <button type="button" class="btn btn-danger"
                         onclick='location
                                 .href="${pageContext.request
-                                .contextPath}/deleteProduct?productId=${product
+                                .contextPath}/products/delete?productId=${product
                                 .productId}"'>Delete
                 </button>
             </td>

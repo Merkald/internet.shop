@@ -7,6 +7,9 @@
     <title>Shopping Cart Items</title>
 </head>
 <body class="bg-dark">
+<div class="bg-success">
+    <%@include file="/WEB-INF/views/users/userDetails.jsp" %>
+</div>
 <button type="button" class="btn btn-secondary"
         onclick='location.href="../../.."'>Home
 </button>
@@ -14,7 +17,7 @@
         onclick='location.href="http://localhost:8080/products/all"'>Add Product
 </button>
 <button type="button" class="btn btn-primary"
-        onclick='location.href="http://localhost:8080/CreateOrder?id=${shoppingCart.shoppingCartId}"'>Complete Order
+        onclick='location.href="http://localhost:8080/orders/create?id=${shoppingCartId}"'>Complete Order
 </button>
 <h1 style="color: white">Shopping Cart</h1>
 <table border="1" class="table table-striped table-dark">
@@ -23,7 +26,7 @@
         <th class="mx-auto" style="width: 400px;">Name</th>
         <th class="mx-auto" style="width: 400px;">Price</th>
     </tr>
-    <c:forEach var="product" items="${shoppingCart.items}">
+    <c:forEach var="product" items="${shoppingCartProducts}">
         <tr>
             <td>
                 <c:out value="${product.productId}"/>
@@ -38,7 +41,7 @@
                 <button type="button" class="btn btn-danger"
                         onclick='location
                                 .href="${pageContext.request
-                                .contextPath}/removeProductFromShopCart?productId=${product
+                                .contextPath}/shoppingCart/removeProduct?productId=${product
                                 .productId}"'>Delete from Shopping Cart
                 </button>
             </td>

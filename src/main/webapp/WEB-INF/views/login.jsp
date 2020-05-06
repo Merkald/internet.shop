@@ -6,11 +6,8 @@
     <title>Login</title>
 </head>
 <body class="bg-secondary">
-<button type="button" class="btn btn-dark"
-        onclick='location.href="http://localhost:8080/"'>Home
-</button>
 <button type="button" class="btn btn-warning"
-        onclick='location.href="/InjectData"'>Inject Data
+        onclick='location.href="/injectData"'>Inject Data
 </button>
 <br>
 <br>
@@ -22,9 +19,9 @@
     </div>
     <div class="card-body">
         <h6 class="mx-auto" style="width: 260px;">If you doesnt have account
-            <a href="http://localhost:8080/registration">Register</a>
+            <a href="http://localhost:8080/users/registration">Register</a>
         </h6>
-        <form action="${pageContext.request.contextPath}/login"
+        <form action="${pageContext.request.contextPath}/users/login"
               method="post">
             <div class="card-body form-group">
                 <label>Login</label>

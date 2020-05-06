@@ -2,6 +2,7 @@ package internet.shop.model;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 public class User {
     private Long userId;
@@ -12,6 +13,7 @@ public class User {
     private String email;
     private Integer phone;
     private String password;
+    private Set<Role> roles;
 
     public User(String firstName, String lastName,
                 int age, String login, String email, String password) {
@@ -21,6 +23,14 @@ public class User {
         this.login = login;
         this.email = email;
         this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRole(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public void setUserId(Long userId) {

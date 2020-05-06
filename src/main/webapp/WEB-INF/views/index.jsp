@@ -6,6 +6,9 @@
     <title>Title</title>
 </head>
 <body class="bg-secondary">
+<div class="bg-success">
+    <%@include file="/WEB-INF/views/users/userDetails.jsp" %>
+</div>
 <br>
 <br>
 <h1 class="mx-auto"  style="width: 200px;">Main Page</h1>
@@ -23,12 +26,6 @@
 
         <div id="collapseOne" class="collapse show bg-dark" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
-                <button type="button" class="btn btn-primary"
-                        onclick='location.href="http://localhost:8080/registration"'>Registration
-                </button>
-                <button type="button" class="btn btn-primary"
-                        onclick='location.href="http://localhost:8080/login"'>Login
-                </button>
                 <button type="button" class="btn btn-primary"
                         onclick='location.href="http://localhost:8080/products/all"'>All Products for User
                 </button>
@@ -74,7 +71,10 @@
         <div id="collapseThree" class="collapse bg-dark" aria-labelledby="headingThree" data-parent="#accordion">
             <div class="card-body">
                 <button type="button" class="btn btn-primary"
-                        onclick='location.href="/InjectData"'>Inject Data
+                        onclick='location.href="/injectData"'>Inject Data
+                </button>
+                <button type="button" class="btn btn-primary"
+                        onclick='location.href="/userInclude"'>User Include
                 </button>
             </div>
         </div>

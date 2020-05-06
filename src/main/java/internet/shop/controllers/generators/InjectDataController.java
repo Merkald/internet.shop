@@ -2,6 +2,7 @@ package internet.shop.controllers.generators;
 
 import internet.shop.lib.Injector;
 import internet.shop.model.Product;
+import internet.shop.model.Role;
 import internet.shop.model.ShoppingCart;
 import internet.shop.model.User;
 import internet.shop.service.ProductService;
@@ -9,6 +10,7 @@ import internet.shop.service.ShoppingCartService;
 import internet.shop.service.UserService;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,8 +40,15 @@ public class InjectDataController extends HttpServlet {
     }
 
     private void generateUsers(UserService userService, int amount) {
-        User user = userService.create(new User("q",
-                "q", 1, "q", "q", "q"));
+        User user = new User("Boris",
+                "Britva", 1, "q", "q", "q");
+        user.setRole(Set.of(Role.of("ADMIN")));
+        userService.create(user);
+        shoppingCartService.create(new ShoppingCart(user));
+        user = new User("Petro",
+                "Kowbasa", 1, "w", "q", "w");
+        user.setRole(Set.of(Role.of("USER")));
+        userService.create(user);
         shoppingCartService.create(new ShoppingCart(user));
         for (int i = 0; i < amount; i++) {
             String firstName = new StringBuilder("Name ").append(i).toString();
@@ -47,8 +56,10 @@ public class InjectDataController extends HttpServlet {
             String login = new StringBuilder("login ").append(i).toString();
             String email = new StringBuilder("email@").append(i).toString();
             String password = new StringBuilder("pass").append(i).toString();
-            user = userService.create(new User(firstName,
-                    lastName, i, login, email, password));
+            user = new User(firstName,
+                    lastName, i, login, email, password);
+            user.setRole(Set.of(Role.of("USER")));
+            userService.create(user);
             shoppingCartService.create(new ShoppingCart(user));
         }
     }

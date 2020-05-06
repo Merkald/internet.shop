@@ -7,6 +7,9 @@
     <title>allUserOrders</title>
 </head>
 <body class="bg-dark">
+<div class="bg-success">
+    <%@include file="/WEB-INF/views/users/userDetails.jsp" %>
+</div>
 <button type="button" class="btn btn-secondary"
         onclick='location.href="http://localhost:8080/"'>Home
 </button>
@@ -30,7 +33,7 @@
                 <button type="button" class="btn btn-primary"
                         onclick='location
                                 .href="${pageContext.request
-                                .contextPath}/OrderInfo?orderId=${order
+                                .contextPath}/orders/OrderInfo?orderId=${order
                                 .orderId}"'>Info
                 </button>
             </td>
@@ -38,7 +41,7 @@
                 <button type="button" class="btn btn-danger"
                         onclick='location
                                 .href="${pageContext.request
-                                .contextPath}/DeleteOrder?orderId=${order
+                                .contextPath}/orders/DeleteOrder?orderId=${order
                                 .orderId}"'>Delete
                 </button>
             </td>

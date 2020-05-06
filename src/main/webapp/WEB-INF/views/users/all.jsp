@@ -10,9 +10,6 @@
 <button type="button" class="btn btn-secondary"
         onclick='location.href="http://localhost:8080/"'>Home
 </button>
-<button type="button" class="btn bg-success"
-        onclick='location.href="http://localhost:8080/registration"'>Register new User
-</button>
 <h1 style="color: white">All users page</h1>
 <table border="1" class="table table-striped table-dark">
     <tr>
@@ -56,7 +53,7 @@
                 <button type="button" class="btn btn-danger"
                         onclick='location
                                 .href="${pageContext.request
-                                .contextPath}/deleteUser?userId=${user
+                                .contextPath}/users/delete?userId=${user
                                 .userId}"'>Delete
                 </button>
             </td>
