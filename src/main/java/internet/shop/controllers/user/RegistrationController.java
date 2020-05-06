@@ -44,8 +44,8 @@ public class RegistrationController extends HttpServlet {
             shoppingCartService.create(new ShoppingCart(user));
             resp.sendRedirect(req.getContextPath() + "/users/all");
         } else {
-            LOGGER.error("Passwords are not sames");
-            req.setAttribute("message", "passwords are not sames!");
+            LOGGER.error("Passwords don't match!");
+            req.setAttribute("message", "Passwords don't match!");
             req.getRequestDispatcher("/WEB-INF/views/users/registration.jsp").forward(req, resp);
         }
     }
