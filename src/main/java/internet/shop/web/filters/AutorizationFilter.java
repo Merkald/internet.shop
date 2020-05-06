@@ -16,8 +16,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
 
 public class AutorizationFilter implements Filter {
+    private static final Logger LOGGER = Logger.getLogger(AutorizationFilter.class);
     private static final String USER_ID = "user_id";
     private static final Injector INJECTOR = Injector.getInstance("internet.shop");
     private UserService userService = (UserService) INJECTOR.getInstance(UserService.class);
@@ -56,6 +58,7 @@ public class AutorizationFilter implements Filter {
         if (isAuthorized(user, protectedUrls.get(url))) {
             filterChain.doFilter(req, resp);
         } else {
+            LOGGER.warn("User with id=" + user.getUserId() + " doesnt have access to " + url);
             req.getRequestDispatcher("/WEB-INF/views/accesDenied.jsp").forward(req, resp);
         }
     }
