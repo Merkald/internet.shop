@@ -5,9 +5,11 @@ import internet.shop.lib.Inject;
 import internet.shop.lib.Service;
 import internet.shop.model.User;
 import internet.shop.service.UserService;
+import org.apache.log4j.Logger;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
+    private static final Logger LOGGER = Logger.getLogger(AuthenticationServiceImpl.class);
     @Inject
     private UserService userService;
 
@@ -19,6 +21,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (userFromDB.getPassword().equals(password)) {
             return userFromDB;
         } else {
+            LOGGER.error("Incorrect username or password");
             throw new AuthenticationExeption("Incorrect username or password");
         }
     }

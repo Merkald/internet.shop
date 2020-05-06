@@ -12,8 +12,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
 
 public class RegistrationController extends HttpServlet {
+    private static final Logger LOGGER = Logger.getLogger(RegistrationController.class);
     private static final Injector INJECTOR = Injector.getInstance("internet.shop");
     private UserService userService = (UserService) INJECTOR.getInstance(UserService.class);
     private ShoppingCartService shoppingCartService = (ShoppingCartService) INJECTOR
@@ -42,7 +44,8 @@ public class RegistrationController extends HttpServlet {
             shoppingCartService.create(new ShoppingCart(user));
             resp.sendRedirect(req.getContextPath() + "/users/all");
         } else {
-            req.setAttribute("message", "passwords are not sames!");
+            LOGGER.error("Passwords don't match!");
+            req.setAttribute("message", "Passwords don't match!");
             req.getRequestDispatcher("/WEB-INF/views/users/registration.jsp").forward(req, resp);
         }
     }
