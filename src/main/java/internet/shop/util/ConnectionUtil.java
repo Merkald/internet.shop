@@ -1,6 +1,5 @@
 package internet.shop.util;
 
-import internet.shop.dao.impl.ProductDaoImpl;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -8,7 +7,7 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 public class ConnectionUtil {
-    private static final Logger LOGGER = Logger.getLogger(ProductDaoImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(ConnectionUtil.class);
 
     static {
         try {
