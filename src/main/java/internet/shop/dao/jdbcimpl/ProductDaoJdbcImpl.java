@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 
 @Dao
 public class ProductDaoJdbcImpl implements ProductDao {
+    private static final int ID_COLUMN = 1;
     private static final Logger LOGGER = Logger.getLogger(ProductDaoJdbcImpl.class);
 
     @Override
@@ -43,11 +44,17 @@ public class ProductDaoJdbcImpl implements ProductDao {
         String query = "INSERT INTO `internet_shop`.`products`"
                 + " (`product_name`, `product_price`) VALUES (?, ?);";
         try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement statement = connection
+                    .prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, product.getName());
             statement.setBigDecimal(2, product.getPrice());
-            int id = statement.executeUpdate();
-            product.setProductId((long) id);
+            statement.executeUpdate();
+            ResultSet resultSet = statement.getGeneratedKeys();
+            Long productId = 0L;
+            while (resultSet.next()) {
+                productId = resultSet.getLong(ID_COLUMN);
+            }
+            product.setProductId(productId);
             return product;
         } catch (SQLException ex) {
             LOGGER.error("Cant INSERT product IN mySQL", ex);
