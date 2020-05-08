@@ -50,9 +50,8 @@ public class ProductDaoJdbcImpl implements ProductDao {
             statement.setBigDecimal(2, product.getPrice());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
-            Long productId = 0L;
             while (resultSet.next()) {
-                productId = resultSet.getLong(ID_COLUMN);
+                Long productId = resultSet.getLong(ID_COLUMN);
                 product.setProductId(productId);
             }
             return product;
