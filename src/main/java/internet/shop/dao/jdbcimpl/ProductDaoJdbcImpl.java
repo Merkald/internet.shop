@@ -68,21 +68,13 @@ public class ProductDaoJdbcImpl implements ProductDao {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                long productId = resultSet.getLong("product_id");
-                String productName = resultSet.getString("product_name");
-                BigDecimal productPrice = resultSet.getBigDecimal("product_price");
-                Product product = new Product(productName, productPrice);
-                product.setProductId(productId);
-                return Optional.of(product);
-            }
+            return Optional.of(getProductFromResultSet(resultSet).get(0));
         } catch (SQLException ex) {
             LOGGER.error("Cant SELECT user with id:"
                     + id + " ALL FROM mySQL", ex);
             throw new DataProcessingException("Cant SELECT user with id:"
                     + id + " ALL FROM mySQL");
         }
-        return Optional.empty();
     }
 
     @Override
@@ -91,16 +83,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
         try (Connection connection = ConnectionUtil.getConnection()) {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
-            List<Product> result = new ArrayList<>();
-            while (resultSet.next()) {
-                long productId = resultSet.getLong("product_id");
-                String productName = resultSet.getString("product_name");
-                BigDecimal productPrice = resultSet.getBigDecimal("product_price");
-                Product product = new Product(productName, productPrice);
-                product.setProductId(productId);
-                result.add(product);
-            }
-            return result;
+            return getProductFromResultSet(resultSet);
         } catch (SQLException ex) {
             LOGGER.error("Cant SELECT ALL FROM mySQL", ex);
             throw new DataProcessingException("Cant SELECT ALL FROM mySQL");
@@ -109,7 +92,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
 
     @Override
     public boolean deleteById(Long id) {
-        String query = "DELETE  FROM products "
+        String query = "DELETE FROM products "
                 + "WHERE product_id=?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -120,5 +103,18 @@ public class ProductDaoJdbcImpl implements ProductDao {
             LOGGER.error("Cant DELETE product IN mySQL", ex);
             throw new DataProcessingException("Cant DELETE product IN mySQL");
         }
+    }
+
+    public List<Product> getProductFromResultSet(ResultSet resultSet) throws SQLException {
+        List<Product> result = new ArrayList<>();
+        while (resultSet.next()) {
+            long productId = resultSet.getLong("product_id");
+            String productName = resultSet.getString("product_name");
+            BigDecimal productPrice = resultSet.getBigDecimal("product_price");
+            Product product = new Product(productName, productPrice);
+            product.setProductId(productId);
+            result.add(product);
+        }
+        return result;
     }
 }
