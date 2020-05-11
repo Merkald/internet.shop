@@ -68,7 +68,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            return Optional.of(getProductFromResultSet(resultSet).get(0));
+            return getProductFromResultSet(resultSet).stream().findFirst();
         } catch (SQLException ex) {
             LOGGER.error("Cant SELECT user with id:"
                     + id + " ALL FROM mySQL", ex);
