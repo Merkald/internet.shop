@@ -56,7 +56,6 @@ public class ProductDaoJdbcImpl implements ProductDao {
             }
             return product;
         } catch (SQLException ex) {
-            LOGGER.error("Cant INSERT product IN mySQL", ex);
             throw new DataProcessingException("Cant INSERT product IN mySQL");
         }
     }
@@ -68,7 +67,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            return getProductFromResultSet(resultSet).stream().findFirst();
+            return getProductsFromResultSet(resultSet).stream().findFirst();
         } catch (SQLException ex) {
             LOGGER.error("Cant SELECT user with id:"
                     + id + " ALL FROM mySQL", ex);
@@ -83,7 +82,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
         try (Connection connection = ConnectionUtil.getConnection()) {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
-            return getProductFromResultSet(resultSet);
+            return getProductsFromResultSet(resultSet);
         } catch (SQLException ex) {
             LOGGER.error("Cant SELECT ALL FROM mySQL", ex);
             throw new DataProcessingException("Cant SELECT ALL FROM mySQL");
@@ -105,7 +104,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
         }
     }
 
-    public List<Product> getProductFromResultSet(ResultSet resultSet) throws SQLException {
+    public List<Product> getProductsFromResultSet(ResultSet resultSet) throws SQLException {
         List<Product> result = new ArrayList<>();
         while (resultSet.next()) {
             long productId = resultSet.getLong("product_id");
