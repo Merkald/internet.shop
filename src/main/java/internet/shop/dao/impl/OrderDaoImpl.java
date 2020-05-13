@@ -9,8 +9,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Dao
 public class OrderDaoImpl implements OrderDao {
+    @Override
+    public Order update(Order product) {
+        return null;
+    }
+
     @Override
     public Order create(Order order) {
         Storage.addOrder(order);

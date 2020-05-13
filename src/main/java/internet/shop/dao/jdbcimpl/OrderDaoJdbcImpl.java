@@ -31,6 +31,29 @@ public class OrderDaoJdbcImpl implements OrderDao {
     }
 
     @Override
+    public Order update(Order order) {
+        try(Connection connection = ConnectionUtil.getConnection()) {
+            String query = "UPDATE internet_shop.orders "
+                    + "SET user_id=? "
+                    + "WHERE order_id=?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setLong(1,order.getUserId());
+            statement.setLong(2,order.getOrderId());
+            for (Product product : order.getProducts()) {
+                query = "INSERT INTO orders_products(order_id, product_id) "
+                        + "VALUES (?,?)";
+                statement = connection.prepareStatement(query);
+                statement.setLong(1, order.getOrderId());
+                statement.setLong(2, product.getProductId());
+                statement.executeUpdate();
+            }
+            return order;
+        } catch (SQLException ex) {
+            throw new DataProcessingException("Cant update Shopping Cart.", ex);
+        }
+    }
+
+    @Override
     public Order create(Order order) {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "INSERT INTO orders(user_id) VALUE (?)";
@@ -42,8 +65,9 @@ public class OrderDaoJdbcImpl implements OrderDao {
             while (resultSet.next()) {
                 Long orderId = resultSet.getLong(ID_COLUMN);
                 order.setOrderId(orderId);
-                return order;
+                return update(order);
             }
+
         } catch (SQLException ex) {
             throw new DataProcessingException("Cant create Shopping Cart.", ex);
         }

@@ -24,10 +24,8 @@ public class CreateOrderController extends HttpServlet {
             throws ServletException, IOException {
         Long id = Long.valueOf(req.getParameter("id"));
         Long userId = (Long) req.getSession().getAttribute(USER_ID);
-        ShoppingCart shoppingCart = shoppingCartService.getByUserId(userId);
         Order order = orderService
-                .completeOrder(shoppingCart.getProducts(), userId);
-        shoppingCartService.clear(shoppingCart);
+                .completeOrder(userId);
         req.setAttribute("order", order);
         req.getRequestDispatcher("/WEB-INF/views/orders/order.jsp").forward(req, resp);
     }

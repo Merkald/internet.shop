@@ -83,9 +83,6 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
     public Optional<ShoppingCart> getByUserId(Long id){
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM shopping_carts "
-                    + "JOIN shopping_carts_products "
-                    + "ON shopping_carts.shopping_cart_id = "
-                    + "shopping_carts_products.shopping_cart_id "
                     + "WHERE user_id=?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
@@ -131,7 +128,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
         List<ShoppingCart> result = new ArrayList<>();
         while (resultSet.next()) {
             Long userId = resultSet.getLong("user_id");
-            Long shoppingCartId = resultSet.getLong("shopping_cart_login");
+            Long shoppingCartId = resultSet.getLong("shopping_cart_id");
             try (Connection connection = ConnectionUtil.getConnection()) {
                 String query = "SELECT * FROM shopping_carts_products "
                         + "JOIN products p "
