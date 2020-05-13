@@ -16,16 +16,16 @@ public class OrderServiceImpl implements OrderService {
     private OrderDao orderDao;
 
     @Override
-    public Order completeOrder(List<Product> products, User user) {
+    public Order completeOrder(List<Product> products, Long userId) {
         List<Product> productsClone = new ArrayList<>();
         productsClone.addAll(products);
-        Order order = new Order(user, productsClone);
+        Order order = new Order(userId, productsClone);
         return orderDao.create(order);
     }
 
     @Override
     public List<Order> getUserOrders(User user) {
-        return orderDao.getUserOrders(user);
+        return orderDao.getUserOrders(user.getUserId());
     }
 
     @Override

@@ -40,8 +40,8 @@ public class RegistrationController extends HttpServlet {
         if (password.equals(passwordRepeat)) {
             User user = new User(firstName, lastName, age, login, email, password);
             user.setRole(Set.of(Role.of("USER")));
-            userService.create(user);
-            shoppingCartService.create(new ShoppingCart(user));
+            user = userService.create(user);
+            shoppingCartService.create(new ShoppingCart(user.getUserId()));
             resp.sendRedirect(req.getContextPath() + "/users/all");
         } else {
             LOGGER.error("Passwords don't match!");

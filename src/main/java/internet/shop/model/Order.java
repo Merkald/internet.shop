@@ -6,12 +6,12 @@ import java.util.Objects;
 public class Order {
     private Long orderId;
     private final List<Product> products;
-    private final User user;
+    private final Long userId;
 
-    public Order(User user, List<Product> products) {
+    public Order(Long userId, List<Product> products) {
         List<Product> products1 = products;
         this.products = products1;
-        this.user = user;
+        this.userId = userId;
     }
 
     public void setOrderId(Long orderId) {
@@ -26,8 +26,8 @@ public class Order {
         return List.copyOf(products);
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
     @Override
@@ -41,12 +41,12 @@ public class Order {
         Order order = (Order) o;
         return getOrderId().equals(order.getOrderId())
                 && getProducts().equals(order.getProducts())
-                && getUser().equals(order.getUser());
+                && getUserId().equals(order.getUserId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getOrderId(), getProducts(), getUser());
+        return Objects.hash(getOrderId(), getProducts(), getUserId());
     }
 
     @Override
@@ -54,7 +54,7 @@ public class Order {
         return "Order{"
                 + "orderId=" + orderId
                 + ", items=" + products
-                + ", user=" + user
+                + ", user=" + userId
                 + '}';
     }
 }

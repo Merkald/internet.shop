@@ -8,7 +8,6 @@ import internet.shop.storage.Storage;
 import java.util.List;
 import java.util.Optional;
 
-@Dao
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
     @Override
     public ShoppingCart create(ShoppingCart shoppingCart) {
@@ -44,8 +43,12 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     }
 
     @Override
-    public void clear(ShoppingCart shoppingCart) {
-        Storage.shoppingCards
-                .get(shoppingCart.getShoppingCartId().intValue()).getProducts().clear();
+    public ShoppingCart update(ShoppingCart shoppingCart) {
+        return null;
+    }
+
+    @Override
+    public Optional<ShoppingCart> getByUserId(Long id) {
+        return Optional.empty();
     }
 }
