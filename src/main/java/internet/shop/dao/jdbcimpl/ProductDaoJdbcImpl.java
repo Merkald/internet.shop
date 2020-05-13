@@ -35,7 +35,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             return newProduct;
         } catch (SQLException ex) {
             LOGGER.error("Cant UPDATE product IN mySQL", ex);
-            throw new DataProcessingException("Cant UPDATE product IN mySQL");
+            throw new DataProcessingException("Cant UPDATE product IN mySQL",ex);
         }
     }
 
@@ -56,7 +56,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             }
             return product;
         } catch (SQLException ex) {
-            throw new DataProcessingException("Cant INSERT product IN mySQL");
+            throw new DataProcessingException("Cant INSERT product IN mySQL",ex);
         }
     }
 
@@ -72,7 +72,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             LOGGER.error("Cant SELECT user with id:"
                     + id + " ALL FROM mySQL", ex);
             throw new DataProcessingException("Cant SELECT user with id:"
-                    + id + " ALL FROM mySQL");
+                    + id + " ALL FROM mySQL",ex);
         }
     }
 
@@ -85,7 +85,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             return getProductsFromResultSet(resultSet);
         } catch (SQLException ex) {
             LOGGER.error("Cant SELECT ALL FROM mySQL", ex);
-            throw new DataProcessingException("Cant SELECT ALL FROM mySQL");
+            throw new DataProcessingException("Cant SELECT ALL FROM mySQL",ex);
         }
     }
 
@@ -100,7 +100,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             return true;
         } catch (SQLException ex) {
             LOGGER.error("Cant DELETE product IN mySQL", ex);
-            throw new DataProcessingException("Cant DELETE product IN mySQL");
+            throw new DataProcessingException("Cant DELETE product IN mySQL",ex);
         }
     }
 
