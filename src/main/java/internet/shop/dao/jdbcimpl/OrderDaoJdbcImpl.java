@@ -40,7 +40,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
     @Override
     public Order update(Order order) {
         try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "UPDATE internet_shop.orders "
+            String query = "UPDATE orders "
                     + "SET user_id=? "
                     + "WHERE order_id=?";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -115,7 +115,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
     public boolean deleteById(Long id) {
         try (Connection connection = ConnectionUtil.getConnection()) {
             clear(id);
-            String query = "DELETE FROM internet_shop.orders "
+            String query = "DELETE FROM orders "
                     + "WHERE order_id=?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);

@@ -23,7 +23,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
 
     @Override
     public Product update(Product newProduct) {
-        String query = "UPDATE internet_shop.products "
+        String query = "UPDATE products "
                 + "SET product_name = ?, product_price = ? "
                 + "WHERE product_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
@@ -41,7 +41,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
 
     @Override
     public Product create(Product product) {
-        String query = "INSERT INTO internet_shop.products"
+        String query = "INSERT INTO products"
                 + " (product_name, product_price) VALUES (?, ?);";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection

@@ -23,7 +23,7 @@ public class UserDaoJdbcImpl implements UserDao {
     @Override
     public User update(User newUser) {
         try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "UPDATE internet_shop.users SET user_login = ?,"
+            String query = "UPDATE users SET user_login = ?,"
                     + " user_password = ?,"
                     + " user_first_name = ?,"
                     + " user_last_name = ?,"
@@ -47,7 +47,7 @@ public class UserDaoJdbcImpl implements UserDao {
     @Override
     public Optional<User> findByLogin(String login) {
         try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "SELECT * FROM internet_shop.users "
+            String query = "SELECT * FROM users "
                     + "JOIN users_roles ON users.user_id = users_roles.user_id "
                     + "JOIN roles r on users_roles.role_id = r.role_id "
                     + "WHERE user_login=?;";
@@ -99,7 +99,7 @@ public class UserDaoJdbcImpl implements UserDao {
     @Override
     public Optional<User> get(Long id) {
         try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "SELECT * FROM internet_shop.users "
+            String query = "SELECT * FROM users "
                     + "JOIN users_roles ON users.user_id = users_roles.user_id "
                     + "JOIN roles r on users_roles.role_id = r.role_id "
                     + "WHERE users.user_id=?;";
@@ -117,7 +117,7 @@ public class UserDaoJdbcImpl implements UserDao {
     @Override
     public List<User> getAll() {
         try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "SELECT * FROM internet_shop.users "
+            String query = "SELECT * FROM users "
                     + "JOIN users_roles ON users.user_id = users_roles.user_id "
                     + "JOIN roles r on users_roles.role_id = r.role_id;";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -135,12 +135,12 @@ public class UserDaoJdbcImpl implements UserDao {
     @Override
     public boolean deleteById(Long id) {
         try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "DELETE FROM internet_shop.users_roles "
+            String query = "DELETE FROM users_roles "
                     + "WHERE user_id=?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
             statement.executeUpdate();
-            query = "DELETE FROM internet_shop.users "
+            query = "DELETE FROM users "
                     + "WHERE user_id=?;";
             statement = connection.prepareStatement(query);
             statement.setLong(1, id);

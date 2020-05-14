@@ -121,7 +121,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
     public boolean deleteById(Long id) {
         try (Connection connection = ConnectionUtil.getConnection()) {
             clear(id);
-            String query = "DELETE FROM internet_shop.shopping_carts "
+            String query = "DELETE FROM shopping_carts "
                     + "WHERE shopping_cart_id=?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
