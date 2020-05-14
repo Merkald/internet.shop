@@ -91,15 +91,22 @@ public class ProductDaoJdbcImpl implements ProductDao {
 
     @Override
     public boolean deleteById(Long id) {
-        String query = "DELETE FROM products "
-                + "WHERE product_id=?;";
+        deleteRelations("DELETE FROM shopping_carts_products "
+                + "WHERE product_id=?;",id);
+        deleteRelations("DELETE FROM orders_products "
+                + "WHERE product_id=?;",id);
+        deleteRelations("DELETE FROM products "
+                + "WHERE product_id=?;",id);
+        return true;
+    }
+
+    private boolean deleteRelations(String query, Long id) {
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
             statement.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            LOGGER.error("Cant DELETE product IN mySQL", ex);
             throw new DataProcessingException("Cant DELETE product IN mySQL",ex);
         }
     }

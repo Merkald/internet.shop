@@ -2,7 +2,6 @@ package internet.shop.controllers.user;
 
 import internet.shop.lib.Injector;
 import internet.shop.model.Role;
-import internet.shop.model.ShoppingCart;
 import internet.shop.model.User;
 import internet.shop.service.ShoppingCartService;
 import internet.shop.service.UserService;
@@ -41,7 +40,6 @@ public class RegistrationController extends HttpServlet {
             User user = new User(firstName, lastName, age, login, email, password);
             user.setRole(Set.of(Role.of("USER")));
             user = userService.create(user);
-            shoppingCartService.create(new ShoppingCart(user.getUserId()));
             resp.sendRedirect(req.getContextPath() + "/users/all");
         } else {
             LOGGER.error("Passwords don't match!");

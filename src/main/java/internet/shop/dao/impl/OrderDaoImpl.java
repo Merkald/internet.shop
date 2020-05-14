@@ -1,9 +1,7 @@
 package internet.shop.dao.impl;
 
 import internet.shop.dao.OrderDao;
-import internet.shop.lib.Dao;
 import internet.shop.model.Order;
-import internet.shop.model.User;
 import internet.shop.storage.Storage;
 import java.util.List;
 import java.util.Optional;

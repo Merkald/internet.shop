@@ -2,7 +2,6 @@ package internet.shop.controllers.order;
 
 import internet.shop.lib.Injector;
 import internet.shop.model.Order;
-import internet.shop.model.ShoppingCart;
 import internet.shop.service.OrderService;
 import internet.shop.service.ShoppingCartService;
 import java.io.IOException;

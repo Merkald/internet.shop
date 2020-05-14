@@ -9,8 +9,6 @@ import internet.shop.model.Product;
 import internet.shop.model.User;
 import internet.shop.service.OrderService;
 import internet.shop.service.ShoppingCartService;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,7 +22,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order completeOrder(Long userId) {
-        List<Product> productsClone = shoppingCartDao.getByUserId(userId).orElseThrow().getProducts();
+        List<Product> productsClone = shoppingCartDao
+                .getByUserId(userId).orElseThrow().getProducts();
         Order order = new Order(userId, productsClone);
         shoppingCartService.clear(shoppingCartDao.getByUserId(userId).orElseThrow());
         return orderDao.create(order);

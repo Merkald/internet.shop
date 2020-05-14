@@ -48,10 +48,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean deleteById(Long id) {
-        ShoppingCart shoppingCart =shoppingCartDao.getByUserId(id).orElseThrow();
+        ShoppingCart shoppingCart = shoppingCartDao.getByUserId(id).orElseThrow();
         shoppingCartDao.deleteById(shoppingCart.getShoppingCartId());
         List<Order> orders = orderDao.getUserOrders(id);
-        for (Order order:orders) {
+        for (Order order : orders) {
             orderDao.deleteById(order.getOrderId());
         }
         return userDao.deleteById(id);
@@ -59,8 +59,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean deleteByUser(User user) {
-        ShoppingCart shoppingCart =shoppingCartDao.getByUserId(user.getUserId()).orElseThrow();
+        ShoppingCart shoppingCart = shoppingCartDao.getByUserId(user.getUserId()).orElseThrow();
         shoppingCartDao.deleteById(shoppingCart.getShoppingCartId());
+        List<Order> orders = orderDao.getUserOrders(user.getUserId());
+        for (Order order : orders) {
+            orderDao.deleteById(order.getOrderId());
+        }
         return userDao.deleteById(user.getUserId());
     }
 

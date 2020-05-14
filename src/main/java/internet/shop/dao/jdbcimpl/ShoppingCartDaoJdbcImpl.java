@@ -6,9 +6,12 @@ import internet.shop.lib.Dao;
 import internet.shop.model.Product;
 import internet.shop.model.ShoppingCart;
 import internet.shop.util.ConnectionUtil;
-
 import java.math.BigDecimal;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -80,7 +83,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
     }
 
     @Override
-    public Optional<ShoppingCart> getByUserId(Long id){
+    public Optional<ShoppingCart> getByUserId(Long id) {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM shopping_carts "
                     + "WHERE user_id=?";

@@ -6,9 +6,12 @@ import internet.shop.lib.Dao;
 import internet.shop.model.Order;
 import internet.shop.model.Product;
 import internet.shop.util.ConnectionUtil;
-
 import java.math.BigDecimal;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,13 +35,13 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public Order update(Order order) {
-        try(Connection connection = ConnectionUtil.getConnection()) {
+        try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "UPDATE internet_shop.orders "
                     + "SET user_id=? "
                     + "WHERE order_id=?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setLong(1,order.getUserId());
-            statement.setLong(2,order.getOrderId());
+            statement.setLong(1, order.getUserId());
+            statement.setLong(2, order.getOrderId());
             for (Product product : order.getProducts()) {
                 query = "INSERT INTO orders_products(order_id, product_id) "
                         + "VALUES (?,?)";
@@ -126,7 +129,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
                         + "ON orders_products.product_id = p.product_id "
                         + "WHERE order_id=?";
                 PreparedStatement statement = connection.prepareStatement(query);
-                statement.setLong(1,orderId);
+                statement.setLong(1, orderId);
                 ResultSet resultSet1 = statement.executeQuery();
                 Order order = new Order(userId, getProductsFromResultSet(resultSet1));
                 order.setOrderId(orderId);

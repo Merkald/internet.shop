@@ -1,7 +1,6 @@
 package internet.shop.dao.impl;
 
 import internet.shop.dao.ShoppingCartDao;
-import internet.shop.lib.Dao;
 import internet.shop.model.Product;
 import internet.shop.model.ShoppingCart;
 import internet.shop.storage.Storage;
