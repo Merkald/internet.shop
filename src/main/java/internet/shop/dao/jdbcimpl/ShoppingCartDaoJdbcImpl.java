@@ -76,7 +76,8 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            return getShoppingCartsFromResultSet(resultSet).stream().findFirst();
+            resultSet.next();
+            return Optional.of(getShoppingCartsFromResultSet(resultSet));
         } catch (SQLException ex) {
             throw new DataProcessingException("Cant get Shopping Cart.", ex);
         }
@@ -90,7 +91,8 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            return getShoppingCartsFromResultSet(resultSet).stream().findFirst();
+            resultSet.next();
+            return Optional.of(getShoppingCartsFromResultSet(resultSet));
         } catch (SQLException ex) {
             throw new DataProcessingException("Cant get Shopping Cart.", ex);
         }
@@ -105,7 +107,11 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
                     + "shopping_carts_products.shopping_cart_id ";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
-            return getShoppingCartsFromResultSet(resultSet);
+            List<ShoppingCart> result = new ArrayList<>();
+            while (resultSet.next()) {
+                result.add(getShoppingCartsFromResultSet(resultSet));
+            }
+            return result;
         } catch (SQLException ex) {
             throw new DataProcessingException("Cant create Shopping Cart.", ex);
         }
@@ -126,27 +132,23 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
         }
     }
 
-    private List<ShoppingCart> getShoppingCartsFromResultSet(ResultSet resultSet)
+    private ShoppingCart getShoppingCartsFromResultSet(ResultSet resultSet)
             throws SQLException {
-        List<ShoppingCart> result = new ArrayList<>();
-        while (resultSet.next()) {
-            Long userId = resultSet.getLong("user_id");
-            Long shoppingCartId = resultSet.getLong("shopping_cart_id");
-            try (Connection connection = ConnectionUtil.getConnection()) {
-                String query = "SELECT * FROM shopping_carts_products "
-                        + "JOIN products p "
-                        + "ON shopping_carts_products.product_id = p.product_id "
-                        + "WHERE shopping_cart_id=?";
-                PreparedStatement statement = connection.prepareStatement(query);
-                statement.setLong(1, shoppingCartId);
-                ResultSet resultSet1 = statement.executeQuery();
-                ShoppingCart shoppingCart = new ShoppingCart(userId);
-                shoppingCart.setShoppingCartId(shoppingCartId);
-                shoppingCart.setProducts(getProductsFromResultSet(resultSet1));
-                result.add(shoppingCart);
-            }
+        Long userId = resultSet.getLong("user_id");
+        Long shoppingCartId = resultSet.getLong("shopping_cart_id");
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            String query = "SELECT * FROM shopping_carts_products "
+                    + "JOIN products p "
+                    + "ON shopping_carts_products.product_id = p.product_id "
+                    + "WHERE shopping_cart_id=?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setLong(1, shoppingCartId);
+            ResultSet resultSet1 = statement.executeQuery();
+            ShoppingCart shoppingCart = new ShoppingCart(userId);
+            shoppingCart.setShoppingCartId(shoppingCartId);
+            shoppingCart.setProducts(getProductsFromResultSet(resultSet1));
+            return shoppingCart;
         }
-        return result;
     }
 
     private List<Product> getProductsFromResultSet(ResultSet resultSet) throws SQLException {

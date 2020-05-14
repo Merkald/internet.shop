@@ -10,7 +10,9 @@ import java.util.stream.Collectors;
 public class OrderDaoImpl implements OrderDao {
     @Override
     public Order update(Order product) {
-        return null;
+        Order order = Storage.orders.get(Math.toIntExact(product.getOrderId()));
+        order = product;
+        return order;
     }
 
     @Override

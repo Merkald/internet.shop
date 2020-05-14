@@ -35,7 +35,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             return newProduct;
         } catch (SQLException ex) {
             LOGGER.error("Cant UPDATE product IN mySQL", ex);
-            throw new DataProcessingException("Cant UPDATE product IN mySQL",ex);
+            throw new DataProcessingException("Cant UPDATE product IN mySQL", ex);
         }
     }
 
@@ -56,7 +56,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             }
             return product;
         } catch (SQLException ex) {
-            throw new DataProcessingException("Cant INSERT product IN mySQL",ex);
+            throw new DataProcessingException("Cant INSERT product IN mySQL", ex);
         }
     }
 
@@ -67,12 +67,13 @@ public class ProductDaoJdbcImpl implements ProductDao {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            return getProductsFromResultSet(resultSet).stream().findFirst();
+            resultSet.next();
+            return Optional.ofNullable(getProductsFromResultSet(resultSet));
         } catch (SQLException ex) {
             LOGGER.error("Cant SELECT user with id:"
                     + id + " ALL FROM mySQL", ex);
             throw new DataProcessingException("Cant SELECT user with id:"
-                    + id + " ALL FROM mySQL",ex);
+                    + id + " ALL FROM mySQL", ex);
         }
     }
 
@@ -82,21 +83,25 @@ public class ProductDaoJdbcImpl implements ProductDao {
         try (Connection connection = ConnectionUtil.getConnection()) {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
-            return getProductsFromResultSet(resultSet);
+            List<Product> result = new ArrayList<>();
+            while (resultSet.next()) {
+                result.add(getProductsFromResultSet(resultSet));
+            }
+            return result;
         } catch (SQLException ex) {
             LOGGER.error("Cant SELECT ALL FROM mySQL", ex);
-            throw new DataProcessingException("Cant SELECT ALL FROM mySQL",ex);
+            throw new DataProcessingException("Cant SELECT ALL FROM mySQL", ex);
         }
     }
 
     @Override
     public boolean deleteById(Long id) {
         deleteRelations("DELETE FROM shopping_carts_products "
-                + "WHERE product_id=?;",id);
+                + "WHERE product_id=?;", id);
         deleteRelations("DELETE FROM orders_products "
-                + "WHERE product_id=?;",id);
+                + "WHERE product_id=?;", id);
         deleteRelations("DELETE FROM products "
-                + "WHERE product_id=?;",id);
+                + "WHERE product_id=?;", id);
         return true;
     }
 
@@ -107,20 +112,16 @@ public class ProductDaoJdbcImpl implements ProductDao {
             statement.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            throw new DataProcessingException("Cant DELETE product IN mySQL",ex);
+            throw new DataProcessingException("Cant DELETE product IN mySQL", ex);
         }
     }
 
-    public List<Product> getProductsFromResultSet(ResultSet resultSet) throws SQLException {
-        List<Product> result = new ArrayList<>();
-        while (resultSet.next()) {
-            long productId = resultSet.getLong("product_id");
-            String productName = resultSet.getString("product_name");
-            BigDecimal productPrice = resultSet.getBigDecimal("product_price");
-            Product product = new Product(productName, productPrice);
-            product.setProductId(productId);
-            result.add(product);
-        }
-        return result;
+    public Product getProductsFromResultSet(ResultSet resultSet) throws SQLException {
+        long productId = resultSet.getLong("product_id");
+        String productName = resultSet.getString("product_name");
+        BigDecimal productPrice = resultSet.getBigDecimal("product_price");
+        Product product = new Product(productName, productPrice);
+        product.setProductId(productId);
+        return product;
     }
 }

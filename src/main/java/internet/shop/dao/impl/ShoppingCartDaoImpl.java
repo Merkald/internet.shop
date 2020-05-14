@@ -43,11 +43,14 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 
     @Override
     public ShoppingCart update(ShoppingCart shoppingCart) {
-        return null;
+        ShoppingCart result = Storage.shoppingCards
+                .get(Math.toIntExact(shoppingCart.getShoppingCartId()));
+        result = shoppingCart;
+        return result;
     }
 
     @Override
     public Optional<ShoppingCart> getByUserId(Long id) {
-        return Optional.empty();
+        return Storage.shoppingCards.stream().filter(s -> s.getUserId().equals(id)).findFirst();
     }
 }

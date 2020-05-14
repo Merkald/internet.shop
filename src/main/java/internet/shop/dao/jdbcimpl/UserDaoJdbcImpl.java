@@ -54,7 +54,8 @@ public class UserDaoJdbcImpl implements UserDao {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
-            return getUsersFromResultSet(resultSet).stream().findFirst();
+            resultSet.next();
+            return Optional.of(getUsersFromResultSet(resultSet));
         } catch (SQLException ex) {
             throw new DataProcessingException("Cant SELECT user with id:"
                     + login + " ALL FROM mySQL", ex);
@@ -105,7 +106,8 @@ public class UserDaoJdbcImpl implements UserDao {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            return getUsersFromResultSet(resultSet).stream().findFirst();
+            resultSet.next();
+            return Optional.of(getUsersFromResultSet(resultSet));
         } catch (SQLException ex) {
             throw new DataProcessingException("Cant SELECT user with id:"
                     + id + " ALL FROM mySQL", ex);
@@ -120,7 +122,11 @@ public class UserDaoJdbcImpl implements UserDao {
                     + "JOIN roles r on users_roles.role_id = r.role_id;";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
-            return getUsersFromResultSet(resultSet);
+            List<User> result = new ArrayList<>();
+            while (resultSet.next()) {
+                result.add(getUsersFromResultSet(resultSet));
+            }
+            return result;
         } catch (SQLException ex) {
             throw new DataProcessingException("Cant SELECT ALL FROM mySQL", ex);
         }
@@ -145,27 +151,24 @@ public class UserDaoJdbcImpl implements UserDao {
         }
     }
 
-    private List<User> getUsersFromResultSet(ResultSet resultSet) throws SQLException {
-        List<User> result = new ArrayList<>();
-        while (resultSet.next()) {
-            Long userId = resultSet.getLong("user_id");
-            String userLogin = resultSet.getString("user_login");
-            String userPass = resultSet.getString("user_password");
-            String userFName = resultSet.getString("user_first_name");
-            String userLName = resultSet.getString("user_last_name");
-            String userEmail = resultSet.getString("user_email");
-            int userAge = resultSet.getInt("user_age");
-            String roleName = resultSet.getString("role_name");
-            Long roleId = resultSet.getLong("role_id");
-            User user = new User(userFName, userLName, userAge, userLogin, userEmail, userPass);
-            user.setUserId(userId);
-            Role role = Role.of(roleName);
-            role.setRoleId(roleId);
-            Set<Role> roles = user.getRoles();
-            roles.add(role);
-            user.setRole(roles);
-            result.add(user);
-        }
-        return result;
+    private User getUsersFromResultSet(ResultSet resultSet) throws SQLException {
+
+        Long userId = resultSet.getLong("user_id");
+        String userLogin = resultSet.getString("user_login");
+        String userPass = resultSet.getString("user_password");
+        String userFName = resultSet.getString("user_first_name");
+        String userLName = resultSet.getString("user_last_name");
+        String userEmail = resultSet.getString("user_email");
+        int userAge = resultSet.getInt("user_age");
+        String roleName = resultSet.getString("role_name");
+        Long roleId = resultSet.getLong("role_id");
+        User user = new User(userFName, userLName, userAge, userLogin, userEmail, userPass);
+        user.setUserId(userId);
+        Role role = Role.of(roleName);
+        role.setRoleId(roleId);
+        Set<Role> roles = user.getRoles();
+        roles.add(role);
+        user.setRole(roles);
+        return user;
     }
 }
