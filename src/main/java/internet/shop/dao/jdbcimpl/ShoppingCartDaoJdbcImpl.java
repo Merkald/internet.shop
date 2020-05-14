@@ -25,7 +25,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
         try (Connection connection = ConnectionUtil.getConnection()) {
             Long shoppingCartId = shoppingCart.getShoppingCartId();
             Long userId = shoppingCart.getUserId();
-            String query = "UPDATE internet_shop.shopping_carts SET user_id=? "
+            String query = "UPDATE shopping_carts SET user_id=? "
                     + "WHERE shopping_cart_id=?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, userId);
@@ -68,10 +68,9 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
     @Override
     public Optional<ShoppingCart> get(Long id) {
         try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "SELECT * FROM shopping_carts "
-                    + "JOIN shopping_carts_products "
-                    + "ON shopping_carts.shopping_cart_id = "
-                    + "shopping_carts_products.shopping_cart_id "
+            String query = "SELECT * FROM shopping_carts sc "
+                    + "JOIN shopping_carts_products scp "
+                    + "ON sc.shopping_cart_id = scp.shopping_cart_id "
                     + "WHERE shopping_cart_id=?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
@@ -101,10 +100,9 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
     @Override
     public List<ShoppingCart> getAll() {
         try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "SELECT * FROM shopping_carts "
-                    + "JOIN shopping_carts_products "
-                    + "ON shopping_carts.shopping_cart_id = "
-                    + "shopping_carts_products.shopping_cart_id ";
+            String query = "SELECT * FROM shopping_carts sc "
+                    + "JOIN shopping_carts_products scp "
+                    + "ON sc.shopping_cart_id = scp.shopping_cart_id ";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             List<ShoppingCart> result = new ArrayList<>();
@@ -137,9 +135,9 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
         Long userId = resultSet.getLong("user_id");
         Long shoppingCartId = resultSet.getLong("shopping_cart_id");
         try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "SELECT * FROM shopping_carts_products "
+            String query = "SELECT * FROM shopping_carts_products scp "
                     + "JOIN products p "
-                    + "ON shopping_carts_products.product_id = p.product_id "
+                    + "ON scp.product_id = p.product_id "
                     + "WHERE shopping_cart_id=?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, shoppingCartId);

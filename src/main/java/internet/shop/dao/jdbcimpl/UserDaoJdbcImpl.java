@@ -49,7 +49,7 @@ public class UserDaoJdbcImpl implements UserDao {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM users "
                     + "JOIN users_roles ON users.user_id = users_roles.user_id "
-                    + "JOIN roles r on users_roles.role_id = r.role_id "
+                    + "JOIN roles r ON users_roles.role_id = r.role_id "
                     + "WHERE user_login=?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, login);
@@ -101,7 +101,7 @@ public class UserDaoJdbcImpl implements UserDao {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM users "
                     + "JOIN users_roles ON users.user_id = users_roles.user_id "
-                    + "JOIN roles r on users_roles.role_id = r.role_id "
+                    + "JOIN roles r ON users_roles.role_id = r.role_id "
                     + "WHERE users.user_id=?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
