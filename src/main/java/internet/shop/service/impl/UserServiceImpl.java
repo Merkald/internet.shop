@@ -1,8 +1,12 @@
 package internet.shop.service.impl;
 
+import internet.shop.dao.OrderDao;
+import internet.shop.dao.ShoppingCartDao;
 import internet.shop.dao.UserDao;
 import internet.shop.lib.Inject;
 import internet.shop.lib.Service;
+import internet.shop.model.Order;
+import internet.shop.model.ShoppingCart;
 import internet.shop.model.User;
 import internet.shop.service.UserService;
 import java.util.List;
@@ -13,10 +17,17 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     @Inject
     private UserDao userDao;
+    @Inject
+    private ShoppingCartDao shoppingCartDao;
+    @Inject
+    private OrderDao orderDao;
 
     @Override
     public User create(User user) {
-        return userDao.create(user);
+        User user1 = userDao.create(user);
+        ShoppingCart shoppingCart = new ShoppingCart(user.getUserId());
+        shoppingCartDao.create(shoppingCart);
+        return user1;
     }
 
     @Override
@@ -37,11 +48,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean deleteById(Long id) {
+        ShoppingCart shoppingCart = shoppingCartDao.getByUserId(id).orElseThrow();
+        shoppingCartDao.deleteById(shoppingCart.getShoppingCartId());
+        List<Order> orders = orderDao.getUserOrders(id);
+        for (Order order : orders) {
+            orderDao.deleteById(order.getOrderId());
+        }
         return userDao.deleteById(id);
     }
 
     @Override
     public boolean deleteByUser(User user) {
+        ShoppingCart shoppingCart = shoppingCartDao.getByUserId(user.getUserId()).orElseThrow();
+        shoppingCartDao.deleteById(shoppingCart.getShoppingCartId());
+        List<Order> orders = orderDao.getUserOrders(user.getUserId());
+        for (Order order : orders) {
+            orderDao.deleteById(order.getOrderId());
+        }
         return userDao.deleteById(user.getUserId());
     }
 

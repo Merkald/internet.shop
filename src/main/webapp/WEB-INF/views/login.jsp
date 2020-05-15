@@ -6,9 +6,6 @@
     <title>Login</title>
 </head>
 <body class="bg-secondary">
-<button type="button" class="btn btn-warning"
-        onclick='location.href="/injectData"'>Inject Data
-</button>
 <br>
 <br>
 <br>

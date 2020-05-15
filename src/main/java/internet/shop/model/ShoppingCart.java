@@ -6,12 +6,20 @@ import java.util.Objects;
 
 public class ShoppingCart {
     private Long shoppingCartId;
-    private List<Product> items;
-    private User user;
+    private List<Product> products;
+    private Long userId;
 
-    public ShoppingCart(User user) {
-        items = new ArrayList<>();
-        this.user = user;
+    public ShoppingCart(Long userId) {
+        products = new ArrayList<>();
+        this.userId = userId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public void setShoppingCartId(Long shoppingCartId) {
@@ -23,19 +31,11 @@ public class ShoppingCart {
     }
 
     public List<Product> getProducts() {
-        return items;
+        return products;
     }
 
-    public void setItems(List<Product> items) {
-        this.items = items;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public void setProducts(List<Product> items) {
+        this.products = items;
     }
 
     @Override
@@ -49,20 +49,20 @@ public class ShoppingCart {
         ShoppingCart shoppingCart = (ShoppingCart) o;
         return getShoppingCartId().equals(shoppingCart.getShoppingCartId())
                 && getProducts().equals(shoppingCart.getProducts())
-                && getUser().equals(shoppingCart.getUser());
+                && getUserId().equals(shoppingCart.getUserId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getShoppingCartId(), getProducts(), getUser());
+        return Objects.hash(getShoppingCartId(), getProducts(), getUserId());
     }
 
     @Override
     public String toString() {
         return "ShoppingCart{"
                 + "shoppingCartId=" + shoppingCartId
-                + ", items=" + items
-                + ", user=" + user
+                + ", items=" + products
+                + ", user=" + userId
                 + '}';
     }
 }

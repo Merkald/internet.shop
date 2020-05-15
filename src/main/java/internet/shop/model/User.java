@@ -1,5 +1,6 @@
 package internet.shop.model;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -23,6 +24,7 @@ public class User {
         this.login = login;
         this.email = email;
         this.password = password;
+        this.roles = new HashSet<>();
     }
 
     public Set<Role> getRoles() {

@@ -4,7 +4,6 @@ import internet.shop.model.User;
 import java.util.Optional;
 
 public interface UserDao extends GenericDao<User, Long> {
-    User update(User newUser);
 
     Optional<User> findByLogin(String login);
 }

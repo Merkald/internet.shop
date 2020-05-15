@@ -59,26 +59,6 @@
             </div>
         </div>
     </div>
-    <div class="card">
-        <div class="card-header bg-dark" id="headingThree">
-            <h5 class="mb-0">
-                <button class="btn btn-link collapsed btn-secondary mx-auto text-white" style="width: 560px;" data-toggle="collapse" data-target="#collapseThree"
-                        aria-expanded="false" aria-controls="collapseThree">
-                    Generators
-                </button>
-            </h5>
-        </div>
-        <div id="collapseThree" class="collapse bg-dark" aria-labelledby="headingThree" data-parent="#accordion">
-            <div class="card-body">
-                <button type="button" class="btn btn-primary"
-                        onclick='location.href="/injectData"'>Inject Data
-                </button>
-                <button type="button" class="btn btn-primary"
-                        onclick='location.href="/userInclude"'>User Include
-                </button>
-            </div>
-        </div>
-    </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

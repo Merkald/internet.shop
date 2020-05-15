@@ -43,7 +43,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon2">Price</span>
                                     </div>
-                                    <input name="price" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon2">
+                                    <input name="price" type="number" step="any" class="form-control" aria-label="Username" aria-describedby="basic-addon2">
                                 </div>
                             </th>
                             <th>

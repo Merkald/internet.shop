@@ -26,7 +26,7 @@
                 <c:out value="${order.orderId}"/>
             </td>
             <td>
-                <c:out value="${order.user.userId}"/>
+                <c:out value="${order.userId}"/>
             </td>
             <td>
                 <button type="button" class="btn btn-primary"

@@ -25,7 +25,7 @@ public class CreateProductController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         String name = req.getParameter("name");
-        BigDecimal price = BigDecimal.valueOf(Long.parseLong(req.getParameter("price")));
+        BigDecimal price = new BigDecimal(req.getParameter("price"));
         productService.create(new Product(name, price));
         resp.sendRedirect(req.getContextPath() + "/products/adminAll");
     }
