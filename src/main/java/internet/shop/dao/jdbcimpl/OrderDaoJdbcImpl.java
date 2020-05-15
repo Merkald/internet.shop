@@ -114,7 +114,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
     @Override
     public boolean deleteById(Long id) {
         try (Connection connection = ConnectionUtil.getConnection()) {
-            clear(id);
+            clearOrder(id);
             String query = "DELETE FROM orders "
                     + "WHERE order_id=?;";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -157,7 +157,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
         return result;
     }
 
-    private void clear(Long orderId) throws SQLException {
+    private void clearOrder(Long orderId) throws SQLException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "DELETE FROM orders_products WHERE order_id=?";
             PreparedStatement statement = connection.prepareStatement(query);

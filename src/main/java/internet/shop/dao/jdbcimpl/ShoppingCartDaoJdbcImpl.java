@@ -30,7 +30,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, userId);
             statement.setLong(2, shoppingCartId);
-            clear(shoppingCartId);
+            clearShoppingCart(shoppingCartId);
             for (Product product : shoppingCart.getProducts()) {
                 query = "INSERT INTO shopping_carts_products(shopping_cart_id, product_id) "
                         + "VALUES (?,?)";
@@ -118,7 +118,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
     @Override
     public boolean deleteById(Long id) {
         try (Connection connection = ConnectionUtil.getConnection()) {
-            clear(id);
+            clearShoppingCart(id);
             String query = "DELETE FROM shopping_carts "
                     + "WHERE shopping_cart_id=?;";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -162,7 +162,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
         return result;
     }
 
-    private void clear(Long shoppingCartId) throws SQLException {
+    private void clearShoppingCart(Long shoppingCartId) throws SQLException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "DELETE FROM shopping_carts_products WHERE shopping_cart_id=?";
             PreparedStatement statement = connection.prepareStatement(query);
