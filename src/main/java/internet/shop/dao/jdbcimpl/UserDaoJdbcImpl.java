@@ -167,7 +167,8 @@ public class UserDaoJdbcImpl implements UserDao {
         }
     }
 
-    private User insertRolesInToUserFromResultSet(ResultSet resultSet, User user) throws SQLException {
+    private User insertRolesInToUserFromResultSet(ResultSet resultSet, User user)
+            throws SQLException {
         Set<Role> roles = new HashSet<>();
         while (resultSet.next()) {
             String roleName = resultSet.getString("role_name");
