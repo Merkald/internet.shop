@@ -65,8 +65,8 @@ public class UserDaoJdbcImpl implements UserDao {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "INSERT INTO internet_shop.users "
                     + "(user_login, user_password, "
-                    + "user_first_name, user_last_name, user_age, user_email) "
-                    + "VALUES (?, ?, ?, ?, ?, ?);";
+                    + "user_first_name, user_last_name, user_age, user_email, salt) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement statement = connection
                     .prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getLogin());
@@ -75,6 +75,7 @@ public class UserDaoJdbcImpl implements UserDao {
             statement.setString(4, user.getLastName());
             statement.setInt(5, user.getAge());
             statement.setString(6, user.getEmail());
+            statement.setBytes(7, user.getSalt());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             while (resultSet.next()) {
@@ -152,8 +153,9 @@ public class UserDaoJdbcImpl implements UserDao {
         String userFName = resultSet.getString("user_first_name");
         String userLName = resultSet.getString("user_last_name");
         String userEmail = resultSet.getString("user_email");
+        byte[] salt = resultSet.getBytes("salt");
         int userAge = resultSet.getInt("user_age");
-        User user = new User(userFName, userLName, userAge, userLogin, userEmail, userPass);
+        User user = new User(userFName, userLName, userAge, userLogin, userEmail, userPass, salt);
         user.setUserId(userId);
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM users_roles "

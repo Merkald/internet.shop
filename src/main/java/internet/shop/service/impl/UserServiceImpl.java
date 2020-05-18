@@ -9,6 +9,7 @@ import internet.shop.model.Order;
 import internet.shop.model.ShoppingCart;
 import internet.shop.model.User;
 import internet.shop.service.UserService;
+import internet.shop.util.HashUtil;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -24,6 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) {
+        user.setPassword(HashUtil.hashPassword(user.getPassword(),user.getSalt()));
         User user1 = userDao.create(user);
         ShoppingCart shoppingCart = new ShoppingCart(user.getUserId());
         shoppingCartDao.create(shoppingCart);
