@@ -91,7 +91,7 @@ public class UserDaoJdbcImpl implements UserDao {
             statement.executeUpdate();
             return user;
         } catch (SQLException ex) {
-            throw new DataProcessingException("Cant INSERT product IN mySQL", ex);
+            throw new DataProcessingException("Cant INSERT user IN mySQL", ex);
         }
     }
 
