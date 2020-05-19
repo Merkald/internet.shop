@@ -41,12 +41,12 @@ public class InjectDataController extends HttpServlet {
 
     private void generateUsers(UserService userService, int amount) {
         User user = new User("Boris",
-                "Britva", 1, "q", "q", "q", HashUtil.getSalt());
+                "Britva", 1, "q", "q", "q");
         user.setRole(Set.of(Role.of("ADMIN")));
         userService.create(user);
         shoppingCartService.create(new ShoppingCart(user.getUserId()));
         user = new User("Petro",
-                "Kowbasa", 1, "w", "q", "w", HashUtil.getSalt());
+                "Kowbasa", 1, "w", "q", "w");
         user.setRole(Set.of(Role.of("USER")));
         userService.create(user);
         shoppingCartService.create(new ShoppingCart(user.getUserId()));
@@ -57,7 +57,7 @@ public class InjectDataController extends HttpServlet {
             String email = new StringBuilder("email@").append(i).toString();
             String password = new StringBuilder("pass").append(i).toString();
             user = new User(firstName,
-                    lastName, i, login, email, password, HashUtil.getSalt());
+                    lastName, i, login, email, password);
             user.setRole(Set.of(Role.of("USER")));
             userService.create(user);
             shoppingCartService.create(new ShoppingCart(user.getUserId()));

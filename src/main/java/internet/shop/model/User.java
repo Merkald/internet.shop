@@ -18,6 +18,16 @@ public class User {
     private Set<Role> roles;
 
     public User(String firstName, String lastName,
+                int age, String login, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.login = login;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(String firstName, String lastName,
                 int age, String login, String email, String password, byte[] salt) {
         this.firstName = firstName;
         this.lastName = lastName;
