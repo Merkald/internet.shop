@@ -8,7 +8,6 @@ import internet.shop.model.User;
 import internet.shop.service.ProductService;
 import internet.shop.service.ShoppingCartService;
 import internet.shop.service.UserService;
-import internet.shop.util.HashUtil;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Set;

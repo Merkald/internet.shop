@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User create(User user) {
         user.setSalt(HashUtil.getSalt());
-        user.setPassword(HashUtil.hashPassword(user.getPassword(),user.getSalt()));
+        user.setPassword(HashUtil.hashPassword(user.getPassword(), user.getSalt()));
         User newUser = userDao.create(user);
         ShoppingCart shoppingCart = new ShoppingCart(user.getUserId());
         shoppingCartDao.create(shoppingCart);
