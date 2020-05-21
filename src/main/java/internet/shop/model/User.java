@@ -14,6 +14,7 @@ public class User {
     private String email;
     private Integer phone;
     private String password;
+    private byte[] salt;
     private Set<Role> roles;
 
     public User(String firstName, String lastName,
@@ -24,7 +25,30 @@ public class User {
         this.login = login;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String firstName, String lastName,
+                int age, String login, String email, String password, byte[] salt) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.login = login;
+        this.email = email;
+        this.password = password;
         this.roles = new HashSet<>();
+        this.salt = salt;
+    }
+
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public Set<Role> getRoles() {
