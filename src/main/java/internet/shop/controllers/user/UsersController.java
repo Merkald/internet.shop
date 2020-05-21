@@ -1,9 +1,11 @@
 package internet.shop.controllers.user;
 
+import internet.shop.exeptions.DataProcessingException;
 import internet.shop.lib.Injector;
 import internet.shop.model.User;
 import internet.shop.service.UserService;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +19,12 @@ public class UsersController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        List<User> allUsers = userService.getAll();
+        List<User> allUsers = null;
+        try {
+            allUsers = userService.getAll();
+        } catch (SQLException throwables) {
+            throw new DataProcessingException("SQL Error ", throwables);
+        }
         req.setAttribute("users", allUsers);
         req.getRequestDispatcher("/WEB-INF/views/users/all.jsp").forward(req, resp);
     }

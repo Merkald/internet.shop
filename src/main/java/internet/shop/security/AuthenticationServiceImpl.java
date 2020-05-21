@@ -6,16 +6,15 @@ import internet.shop.lib.Service;
 import internet.shop.model.User;
 import internet.shop.service.UserService;
 import internet.shop.util.HashUtil;
-import org.apache.log4j.Logger;
+import java.sql.SQLException;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
-    private static final Logger LOGGER = Logger.getLogger(AuthenticationServiceImpl.class);
     @Inject
     private UserService userService;
 
     @Override
-    public User login(String login, String password) throws AuthenticationExeption {
+    public User login(String login, String password) throws AuthenticationExeption, SQLException {
         User userFromDB = userService.findByLogin(login)
                 .orElseThrow(() ->
                         new AuthenticationExeption("Incorrect username or password"));

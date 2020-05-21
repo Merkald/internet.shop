@@ -1,10 +1,12 @@
 package internet.shop.controllers.shoppingcart;
 
+import internet.shop.exeptions.DataProcessingException;
 import internet.shop.lib.Injector;
 import internet.shop.model.ShoppingCart;
 import internet.shop.service.ProductService;
 import internet.shop.service.ShoppingCartService;
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +24,12 @@ public class ShoppingCartInfoController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         Long userId = (Long) req.getSession().getAttribute(USER_ID);
-        ShoppingCart shoppingCart = shoppingCartService.getByUserId(userId);
+        ShoppingCart shoppingCart = null;
+        try {
+            shoppingCart = shoppingCartService.getByUserId(userId);
+        } catch (SQLException throwables) {
+            throw new DataProcessingException("SQL Error ", throwables);
+        }
         req.setAttribute("shoppingCartId",
                 shoppingCart.getShoppingCartId());
         req.setAttribute("shoppingCartProducts", shoppingCart.getProducts());

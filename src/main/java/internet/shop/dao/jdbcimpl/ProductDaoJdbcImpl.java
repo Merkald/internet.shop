@@ -1,7 +1,6 @@
 package internet.shop.dao.jdbcimpl;
 
 import internet.shop.dao.ProductDao;
-import internet.shop.exeptions.DataProcessingException;
 import internet.shop.lib.Dao;
 import internet.shop.model.Product;
 import internet.shop.util.ConnectionUtil;
@@ -14,15 +13,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import org.apache.log4j.Logger;
 
 @Dao
 public class ProductDaoJdbcImpl implements ProductDao {
     private static final int ID_COLUMN = 1;
-    private static final Logger LOGGER = Logger.getLogger(ProductDaoJdbcImpl.class);
 
     @Override
-    public Product update(Product newProduct) {
+    public Product update(Product newProduct) throws SQLException {
         String query = "UPDATE products "
                 + "SET product_name = ?, product_price = ? "
                 + "WHERE product_id = ?;";
@@ -33,14 +30,11 @@ public class ProductDaoJdbcImpl implements ProductDao {
             statement.setLong(3, newProduct.getProductId());
             statement.executeUpdate();
             return newProduct;
-        } catch (SQLException ex) {
-            LOGGER.error("Cant UPDATE product IN mySQL", ex);
-            throw new DataProcessingException("Cant UPDATE product IN mySQL", ex);
         }
     }
 
     @Override
-    public Product create(Product product) {
+    public Product create(Product product) throws SQLException {
         String query = "INSERT INTO products"
                 + " (product_name, product_price) VALUES (?, ?);";
         try (Connection connection = ConnectionUtil.getConnection()) {
@@ -55,13 +49,11 @@ public class ProductDaoJdbcImpl implements ProductDao {
                 product.setProductId(productId);
             }
             return product;
-        } catch (SQLException ex) {
-            throw new DataProcessingException("Cant INSERT product IN mySQL", ex);
         }
     }
 
     @Override
-    public Optional<Product> get(Long id) {
+    public Optional<Product> getById(Long id) throws SQLException {
         String query = "SELECT * FROM products WHERE product_id=?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -69,16 +61,11 @@ public class ProductDaoJdbcImpl implements ProductDao {
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
             return Optional.ofNullable(getProductsFromResultSet(resultSet));
-        } catch (SQLException ex) {
-            LOGGER.error("Cant SELECT user with id:"
-                    + id + " ALL FROM mySQL", ex);
-            throw new DataProcessingException("Cant SELECT user with id:"
-                    + id + " ALL FROM mySQL", ex);
         }
     }
 
     @Override
-    public List<Product> getAll() {
+    public List<Product> getAll() throws SQLException {
         String query = "SELECT * FROM products;";
         try (Connection connection = ConnectionUtil.getConnection()) {
             Statement statement = connection.createStatement();
@@ -88,14 +75,11 @@ public class ProductDaoJdbcImpl implements ProductDao {
                 result.add(getProductsFromResultSet(resultSet));
             }
             return result;
-        } catch (SQLException ex) {
-            LOGGER.error("Cant SELECT ALL FROM mySQL", ex);
-            throw new DataProcessingException("Cant SELECT ALL FROM mySQL", ex);
         }
     }
 
     @Override
-    public boolean deleteById(Long id) {
+    public boolean deleteById(Long id) throws SQLException {
         deleteRelations("DELETE FROM shopping_carts_products "
                 + "WHERE product_id=?;", id);
         deleteRelations("DELETE FROM orders_products "
@@ -105,14 +89,11 @@ public class ProductDaoJdbcImpl implements ProductDao {
         return true;
     }
 
-    private boolean deleteRelations(String query, Long id) {
+    private void deleteRelations(String query, Long id) throws SQLException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
             statement.executeUpdate();
-            return true;
-        } catch (SQLException ex) {
-            throw new DataProcessingException("Cant DELETE product IN mySQL", ex);
         }
     }
 

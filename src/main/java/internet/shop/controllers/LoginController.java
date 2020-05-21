@@ -1,10 +1,12 @@
 package internet.shop.controllers;
 
 import internet.shop.exeptions.AuthenticationExeption;
+import internet.shop.exeptions.DataProcessingException;
 import internet.shop.lib.Injector;
 import internet.shop.model.User;
 import internet.shop.security.AuthenticationService;
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +38,8 @@ public class LoginController extends HttpServlet {
             req.setAttribute("errorMessage", authenticationExeption.getMessage());
             req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
             return;
+        } catch (SQLException e) {
+            throw new DataProcessingException("SQL Error ", e);
         }
         resp.sendRedirect(req.getContextPath() + "/");
     }

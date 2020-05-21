@@ -1,8 +1,10 @@
 package internet.shop.controllers.order;
 
+import internet.shop.exeptions.DataProcessingException;
 import internet.shop.lib.Injector;
 import internet.shop.service.OrderService;
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +17,11 @@ public class GetAllOrdersController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.setAttribute("orders", orderService.getAll());
+        try {
+            req.setAttribute("orders", orderService.getAll());
+        } catch (SQLException throwables) {
+            throw new DataProcessingException("SQL Error ", throwables);
+        }
         req.getRequestDispatcher("/WEB-INF/views/orders/all.jsp").forward(req, resp);
     }
 }

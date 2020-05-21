@@ -1,9 +1,11 @@
 package internet.shop.controllers.shoppingcart;
 
+import internet.shop.exeptions.DataProcessingException;
 import internet.shop.lib.Injector;
 import internet.shop.service.ProductService;
 import internet.shop.service.ShoppingCartService;
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +24,12 @@ public class RemoveProductFromShopCartController extends HttpServlet {
             throws ServletException, IOException {
         Long productId = Long.valueOf(req.getParameter("productId"));
         Long userId = (Long) req.getSession().getAttribute(USER_ID);
-        shoppingCartService.deleteProduct(shoppingCartService.getByUserId(userId),
-                productService.get(productId));
+        try {
+            shoppingCartService.deleteProduct(shoppingCartService.getByUserId(userId),
+                    productService.get(productId));
+        } catch (SQLException throwables) {
+            throw new DataProcessingException("SQL Error ", throwables);
+        }
         resp.sendRedirect(req.getContextPath() + "/shoppingCart/allProducts");
     }
 }

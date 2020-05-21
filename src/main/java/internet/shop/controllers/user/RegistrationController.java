@@ -1,11 +1,13 @@
 package internet.shop.controllers.user;
 
+import internet.shop.exeptions.DataProcessingException;
 import internet.shop.lib.Injector;
 import internet.shop.model.Role;
 import internet.shop.model.User;
 import internet.shop.service.ShoppingCartService;
 import internet.shop.service.UserService;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -40,7 +42,11 @@ public class RegistrationController extends HttpServlet {
             User user = new User(firstName, lastName, age, login,
                     email, password);
             user.setRole(Set.of(Role.of("USER")));
-            user = userService.create(user);
+            try {
+                user = userService.create(user);
+            } catch (SQLException throwables) {
+                throw new DataProcessingException("SQL Error ", throwables);
+            }
             resp.sendRedirect(req.getContextPath() + "/users/all");
         } else {
             LOGGER.error("Passwords don't match!");

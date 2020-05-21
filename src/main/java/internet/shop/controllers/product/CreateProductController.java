@@ -1,10 +1,12 @@
 package internet.shop.controllers.product;
 
+import internet.shop.exeptions.DataProcessingException;
 import internet.shop.lib.Injector;
 import internet.shop.model.Product;
 import internet.shop.service.ProductService;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +28,11 @@ public class CreateProductController extends HttpServlet {
             throws ServletException, IOException {
         String name = req.getParameter("name");
         BigDecimal price = new BigDecimal(req.getParameter("price"));
-        productService.create(new Product(name, price));
+        try {
+            productService.create(new Product(name, price));
+        } catch (SQLException throwables) {
+            throw new DataProcessingException("SQL Error ", throwables);
+        }
         resp.sendRedirect(req.getContextPath() + "/products/adminAll");
     }
 }

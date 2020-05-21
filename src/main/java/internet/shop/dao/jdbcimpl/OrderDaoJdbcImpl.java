@@ -1,7 +1,6 @@
 package internet.shop.dao.jdbcimpl;
 
 import internet.shop.dao.OrderDao;
-import internet.shop.exeptions.DataProcessingException;
 import internet.shop.lib.Dao;
 import internet.shop.model.Order;
 import internet.shop.model.Product;
@@ -21,7 +20,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
     private static final int ID_COLUMN = 1;
 
     @Override
-    public List<Order> getUserOrders(Long userId) {
+    public List<Order> getUserOrders(Long userId) throws SQLException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM orders WHERE user_id=?";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -32,13 +31,11 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 result.add(getOrdersFromResultSet(resultSet));
             }
             return result;
-        } catch (SQLException ex) {
-            throw new DataProcessingException("Cant create Shopping Cart.", ex);
         }
     }
 
     @Override
-    public Order update(Order order) {
+    public Order update(Order order) throws SQLException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "UPDATE orders "
                     + "SET user_id=? "
@@ -55,13 +52,11 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 statement.executeUpdate();
             }
             return order;
-        } catch (SQLException ex) {
-            throw new DataProcessingException("Cant update Shopping Cart.", ex);
         }
     }
 
     @Override
-    public Order create(Order order) {
+    public Order create(Order order) throws SQLException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "INSERT INTO orders(user_id) VALUE (?)";
             PreparedStatement statement = connection
@@ -74,15 +69,12 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 order.setOrderId(orderId);
                 return update(order);
             }
-
-        } catch (SQLException ex) {
-            throw new DataProcessingException("Cant create Shopping Cart.", ex);
         }
         return null;
     }
 
     @Override
-    public Optional<Order> get(Long id) {
+    public Optional<Order> getById(Long id) throws SQLException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM orders WHERE order_id=?";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -90,13 +82,11 @@ public class OrderDaoJdbcImpl implements OrderDao {
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
             return Optional.of(getOrdersFromResultSet(resultSet));
-        } catch (SQLException ex) {
-            throw new DataProcessingException("Cant create Shopping Cart.", ex);
         }
     }
 
     @Override
-    public List<Order> getAll() {
+    public List<Order> getAll() throws SQLException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM orders";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -106,13 +96,11 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 result.add(getOrdersFromResultSet(resultSet));
             }
             return result;
-        } catch (SQLException ex) {
-            throw new DataProcessingException("Cant create Shopping Cart.", ex);
         }
     }
 
     @Override
-    public boolean deleteById(Long id) {
+    public boolean deleteById(Long id) throws SQLException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             clearOrder(id);
             String query = "DELETE FROM orders "
@@ -121,8 +109,6 @@ public class OrderDaoJdbcImpl implements OrderDao {
             statement.setLong(1, id);
             statement.executeUpdate();
             return true;
-        } catch (SQLException ex) {
-            throw new DataProcessingException("Cant DELETE shoppingCart IN mySQL", ex);
         }
     }
 

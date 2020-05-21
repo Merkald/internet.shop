@@ -1,5 +1,6 @@
 package internet.shop.controllers.generators;
 
+import internet.shop.exeptions.DataProcessingException;
 import internet.shop.lib.Injector;
 import internet.shop.model.Product;
 import internet.shop.model.Role;
@@ -10,6 +11,7 @@ import internet.shop.service.ShoppingCartService;
 import internet.shop.service.UserService;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,17 +30,21 @@ public class InjectDataController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        generateUsers(userService, 10);
+        try {
+            generateUsers(userService, 10);
+        } catch (SQLException throwables) {
+            throw new DataProcessingException("SQL Error ", throwables);
+        }
         resp.sendRedirect(req.getContextPath() + "/");
     }
 
-    private void generateItems(ProductService productService, int amount) {
+    private void generateItems(ProductService productService, int amount) throws SQLException {
         for (int i = 0; i < amount; i++) {
             productService.create(new Product("Item: " + i, new BigDecimal(i)));
         }
     }
 
-    private void generateUsers(UserService userService, int amount) {
+    private void generateUsers(UserService userService, int amount) throws SQLException {
         User user = new User("Boris",
                 "Britva", 1, "q", "q", "q");
         user.setRole(Set.of(Role.of("ADMIN")));

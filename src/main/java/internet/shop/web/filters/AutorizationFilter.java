@@ -1,10 +1,12 @@
 package internet.shop.web.filters;
 
+import internet.shop.exeptions.DataProcessingException;
 import internet.shop.lib.Injector;
 import internet.shop.model.Role;
 import internet.shop.model.User;
 import internet.shop.service.UserService;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +56,12 @@ public class AutorizationFilter implements Filter {
             return;
         }
         Long userId = (Long) req.getSession().getAttribute(USER_ID);
-        User user = userService.get(userId);
+        User user = null;
+        try {
+            user = userService.get(userId);
+        } catch (SQLException throwables) {
+            throw new DataProcessingException("SQL Error ", throwables);
+        }
         if (isAuthorized(user, protectedUrls.get(url))) {
             filterChain.doFilter(req, resp);
         } else {

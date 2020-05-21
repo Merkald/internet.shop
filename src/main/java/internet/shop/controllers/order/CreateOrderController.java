@@ -1,10 +1,12 @@
 package internet.shop.controllers.order;
 
+import internet.shop.exeptions.DataProcessingException;
 import internet.shop.lib.Injector;
 import internet.shop.model.Order;
 import internet.shop.service.OrderService;
 import internet.shop.service.ShoppingCartService;
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,8 +25,13 @@ public class CreateOrderController extends HttpServlet {
             throws ServletException, IOException {
         Long id = Long.valueOf(req.getParameter("id"));
         Long userId = (Long) req.getSession().getAttribute(USER_ID);
-        Order order = orderService
-                .completeOrder(userId);
+        Order order = null;
+        try {
+            order = orderService
+                    .completeOrder(userId);
+        } catch (SQLException throwables) {
+            throw new DataProcessingException("SQL Error ", throwables);
+        }
         req.setAttribute("order", order);
         req.getRequestDispatcher("/WEB-INF/views/orders/order.jsp").forward(req, resp);
     }

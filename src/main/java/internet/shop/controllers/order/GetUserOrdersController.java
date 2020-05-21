@@ -1,10 +1,12 @@
 package internet.shop.controllers.order;
 
+import internet.shop.exeptions.DataProcessingException;
 import internet.shop.lib.Injector;
 import internet.shop.model.User;
 import internet.shop.service.OrderService;
 import internet.shop.service.UserService;
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,9 +22,13 @@ public class GetUserOrdersController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         Long userId = (Long) req.getSession().getAttribute(USER_ID);
-        User user = userService.get(userId);
-        req.setAttribute("user", user);
-        req.setAttribute("userOrders", orderService.getUserOrders(user));
+        try {
+            User user = userService.get(userId);
+            req.setAttribute("user", user);
+            req.setAttribute("userOrders", orderService.getUserOrders(user));
+        } catch (SQLException throwables) {
+            throw new DataProcessingException("SQL Error ", throwables);
+        }
         req.getRequestDispatcher("/WEB-INF/views/orders/userAll.jsp").forward(req, resp);
     }
 }

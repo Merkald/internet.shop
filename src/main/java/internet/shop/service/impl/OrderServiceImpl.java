@@ -9,6 +9,7 @@ import internet.shop.model.Product;
 import internet.shop.model.User;
 import internet.shop.service.OrderService;
 import internet.shop.service.ShoppingCartService;
+import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -21,7 +22,7 @@ public class OrderServiceImpl implements OrderService {
     private ShoppingCartService shoppingCartService;
 
     @Override
-    public Order completeOrder(Long userId) {
+    public Order completeOrder(Long userId) throws SQLException {
         List<Product> productsClone = shoppingCartDao
                 .getByUserId(userId).orElseThrow().getProducts();
         Order order = new Order(userId, productsClone);
@@ -30,22 +31,22 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getUserOrders(User user) {
+    public List<Order> getUserOrders(User user) throws SQLException {
         return orderDao.getUserOrders(user.getUserId());
     }
 
     @Override
-    public Order get(Long id) {
-        return orderDao.get(id).orElseThrow();
+    public Order get(Long id) throws SQLException {
+        return orderDao.getById(id).orElseThrow();
     }
 
     @Override
-    public List<Order> getAll() {
+    public List<Order> getAll() throws SQLException {
         return orderDao.getAll();
     }
 
     @Override
-    public boolean deleteById(Long id) {
+    public boolean deleteById(Long id) throws SQLException {
         return orderDao.deleteById(id);
     }
 }

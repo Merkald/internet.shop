@@ -1,7 +1,6 @@
 package internet.shop.dao.jdbcimpl;
 
 import internet.shop.dao.UserDao;
-import internet.shop.exeptions.DataProcessingException;
 import internet.shop.lib.Dao;
 import internet.shop.model.Role;
 import internet.shop.model.User;
@@ -22,7 +21,7 @@ public class UserDaoJdbcImpl implements UserDao {
     private static final int ID_COLUMN = 1;
 
     @Override
-    public User update(User newUser) {
+    public User update(User newUser) throws SQLException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "UPDATE users SET user_login = ?,"
                     + " user_password = ?,"
@@ -40,13 +39,11 @@ public class UserDaoJdbcImpl implements UserDao {
             statement.setString(6, newUser.getEmail());
             statement.executeUpdate();
             return newUser;
-        } catch (SQLException ex) {
-            throw new DataProcessingException("Cant UPDATE product IN mySQL", ex);
         }
     }
 
     @Override
-    public Optional<User> findByLogin(String login) {
+    public Optional<User> findByLogin(String login) throws SQLException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM users WHERE user_login=?;";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -54,14 +51,11 @@ public class UserDaoJdbcImpl implements UserDao {
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
             return Optional.of(getUserFromResultSet(resultSet));
-        } catch (SQLException ex) {
-            throw new DataProcessingException("Cant SELECT user with id:"
-                    + login + " ALL FROM mySQL", ex);
         }
     }
 
     @Override
-    public User create(User user) {
+    public User create(User user) throws SQLException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "INSERT INTO internet_shop.users "
                     + "(user_login, user_password, "
@@ -90,13 +84,11 @@ public class UserDaoJdbcImpl implements UserDao {
             statement.setLong(2, user.getUserId());
             statement.executeUpdate();
             return user;
-        } catch (SQLException ex) {
-            throw new DataProcessingException("Cant INSERT user IN mySQL", ex);
         }
     }
 
     @Override
-    public Optional<User> get(Long id) {
+    public Optional<User> getById(Long id) throws SQLException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM users WHERE user_id=?;";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -104,14 +96,11 @@ public class UserDaoJdbcImpl implements UserDao {
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
             return Optional.of(getUserFromResultSet(resultSet));
-        } catch (SQLException ex) {
-            throw new DataProcessingException("Cant SELECT user with id:"
-                    + id + " ALL FROM mySQL", ex);
         }
     }
 
     @Override
-    public List<User> getAll() {
+    public List<User> getAll() throws SQLException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM users";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -121,13 +110,11 @@ public class UserDaoJdbcImpl implements UserDao {
                 result.add(getUserFromResultSet(resultSet));
             }
             return result;
-        } catch (SQLException ex) {
-            throw new DataProcessingException("Cant SELECT ALL FROM mySQL", ex);
         }
     }
 
     @Override
-    public boolean deleteById(Long id) {
+    public boolean deleteById(Long id) throws SQLException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "DELETE FROM users_roles "
                     + "WHERE user_id=?;";
@@ -140,8 +127,6 @@ public class UserDaoJdbcImpl implements UserDao {
             statement.setLong(1, id);
             statement.executeUpdate();
             return true;
-        } catch (SQLException ex) {
-            throw new DataProcessingException("Cant DELETE user IN mySQL", ex);
         }
     }
 

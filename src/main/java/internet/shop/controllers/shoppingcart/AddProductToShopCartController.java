@@ -1,9 +1,11 @@
 package internet.shop.controllers.shoppingcart;
 
+import internet.shop.exeptions.DataProcessingException;
 import internet.shop.lib.Injector;
 import internet.shop.service.ProductService;
 import internet.shop.service.ShoppingCartService;
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,11 +24,15 @@ public class AddProductToShopCartController extends HttpServlet {
             throws ServletException, IOException {
         Long productId = Long.valueOf(req.getParameter("productId"));
         Long userId = (Long) req.getSession().getAttribute(USER_ID);
-        shoppingCartService.addProduct(shoppingCartService.getByUserId(userId),
-                productService.get(productId));
-        req.setAttribute("productInShopCard", productService.get(productId)
-                .getName() + " Was added to Shopping Cart.");
-        req.setAttribute("products", productService.getAll());
+        try {
+            shoppingCartService.addProduct(shoppingCartService.getByUserId(userId),
+                    productService.get(productId));
+            req.setAttribute("productInShopCard", productService.get(productId)
+                    .getName() + " Was added to Shopping Cart.");
+            req.setAttribute("products", productService.getAll());
+        } catch (SQLException throwables) {
+            throw new DataProcessingException("SQL Error ", throwables);
+        }
         req.getRequestDispatcher("/WEB-INF/views/products/all.jsp").forward(req, resp);
     }
 }

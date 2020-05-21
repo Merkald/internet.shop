@@ -1,8 +1,9 @@
 package internet.shop.dao;
 
 import internet.shop.model.ShoppingCart;
+import java.sql.SQLException;
 import java.util.Optional;
 
 public interface ShoppingCartDao extends GenericDao<ShoppingCart,Long> {
-    public Optional<ShoppingCart> getByUserId(Long id);
+    public Optional<ShoppingCart> getByUserId(Long id) throws SQLException;
 }
