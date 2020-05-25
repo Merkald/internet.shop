@@ -1,6 +1,5 @@
 package internet.shop.model;
 
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -16,28 +15,6 @@ public class User {
     private String password;
     private byte[] salt;
     private Set<Role> roles;
-
-    public User(String firstName, String lastName,
-                int age, String login, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.login = login;
-        this.email = email;
-        this.password = password;
-    }
-
-    public User(String firstName, String lastName,
-                int age, String login, String email, String password, byte[] salt) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.login = login;
-        this.email = email;
-        this.password = password;
-        this.roles = new HashSet<>();
-        this.salt = salt;
-    }
 
     public byte[] getSalt() {
         return salt;
@@ -133,19 +110,20 @@ public class User {
         }
         User user = (User) o;
         return getAge() == user.getAge()
-                && getUserId().equals(user.getUserId())
-                && getFirstName().equals(user.getFirstName())
-                && getLastName().equals(user.getLastName())
-                && getLogin().equals(user.getLogin())
-                && getEmail().equals(user.getEmail())
-                && Objects.equals(getPhone(), user.getPhone())
-                && getPassword().equals(user.getPassword());
+                && userId.equals(user.getUserId())
+                && firstName.equals(user.getFirstName())
+                && lastName.equals(user.getLastName())
+                && age == user.getAge()
+                && login.equals(user.getLogin())
+                && email.equals(user.getEmail())
+                && Objects.equals(phone, user.getPhone())
+                && password.equals(user.getPassword());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUserId(), getFirstName(), getLastName(), getAge(),
-                getLogin(), getEmail(), getPhone(), getPassword());
+        return Objects.hash(userId, firstName, lastName, login,
+                email, age, phone, password);
     }
 
     @Override

@@ -39,24 +39,19 @@ public class InjectDataController extends HttpServlet {
     }
 
     private void generateUsers(UserService userService, int amount) {
-        User user = new User("Boris",
-                "Britva", 1, "q", "q", "q");
-        user.setRole(Set.of(Role.of("ADMIN")));
-        userService.create(user);
-        shoppingCartService.create(new ShoppingCart(user.getUserId()));
-        user = new User("Petro",
-                "Kowbasa", 1, "w", "q", "w");
-        user.setRole(Set.of(Role.of("USER")));
-        userService.create(user);
-        shoppingCartService.create(new ShoppingCart(user.getUserId()));
         for (int i = 0; i < amount; i++) {
             String firstName = new StringBuilder("Name ").append(i).toString();
             String lastName = new StringBuilder("Family ").append(i).toString();
             String login = new StringBuilder("login ").append(i).toString();
             String email = new StringBuilder("email@").append(i).toString();
             String password = new StringBuilder("pass").append(i).toString();
-            user = new User(firstName,
-                    lastName, i, login, email, password);
+            User user = new User();
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setAge(i);
+            user.setLogin(login);
+            user.setEmail(email);
+            user.setPassword(password);
             user.setRole(Set.of(Role.of("USER")));
             userService.create(user);
             shoppingCartService.create(new ShoppingCart(user.getUserId()));

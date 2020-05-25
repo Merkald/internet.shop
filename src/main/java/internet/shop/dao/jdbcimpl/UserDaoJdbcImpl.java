@@ -155,7 +155,14 @@ public class UserDaoJdbcImpl implements UserDao {
         String userEmail = resultSet.getString("user_email");
         byte[] salt = resultSet.getBytes("salt");
         int userAge = resultSet.getInt("user_age");
-        User user = new User(userFName, userLName, userAge, userLogin, userEmail, userPass, salt);
+        User user = new User();
+        user.setFirstName(userFName);
+        user.setLastName(userLName);
+        user.setAge(userAge);
+        user.setLogin(userLogin);
+        user.setEmail(userEmail);
+        user.setPassword(userPass);
+        user.setSalt(salt);
         user.setUserId(userId);
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM users_roles "
