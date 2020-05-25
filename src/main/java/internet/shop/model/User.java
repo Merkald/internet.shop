@@ -110,14 +110,14 @@ public class User {
         }
         User user = (User) o;
         return getAge() == user.getAge()
-                && userId.equals(user.getUserId())
-                && firstName.equals(user.getFirstName())
-                && lastName.equals(user.getLastName())
-                && age == user.getAge()
-                && login.equals(user.getLogin())
-                && email.equals(user.getEmail())
-                && Objects.equals(phone, user.getPhone())
-                && password.equals(user.getPassword());
+                && userId.equals(user.userId)
+                && firstName.equals(user.firstName)
+                && lastName.equals(user.lastName)
+                && age == user.age
+                && login.equals(user.login)
+                && email.equals(user.email)
+                && Objects.equals(phone, user.phone)
+                && password.equals(user.password);
     }
 
     @Override
