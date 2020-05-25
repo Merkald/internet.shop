@@ -7,7 +7,7 @@
 </head>
 <body class="bg-secondary">
 <div class="bg-success">
-    <%@include file="/WEB-INF/views/users/userDetails.jsp" %>
+    <%@include file="/WEB-INF/views/users/menu.jsp" %>
 </div>
 <br>
 <br>
