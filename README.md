@@ -6,7 +6,8 @@
 <li><a href="#For_developer">For developer</a></li>
 <li><a href="#authors">Authors</a></li>
 </ul>
-<a name="project_purpose"><h2>Project purpose</h2>
+
+<h2><a name="project_purpose"></a>roject purpose</h2>
 This is a template for creating an e-store.
 <br><br>
 It has login and registration forms.
@@ -30,7 +31,7 @@ Admins will have access to the following options:
   <li>All products for Admin - open list of products and provide possibility to delete or create product.</li>
   <li>All orders - open list with all orders.</li>
 </ul>
-<a name="project_structure"><h2>Project Structure</h2>
+<h2><a name="#project_structure"></a>Project Structure</h2>
 <ul>
 <li>java 14</li>
 <li>Maven</li>
@@ -40,7 +41,7 @@ Admins will have access to the following options:
 <li>maven-checkstyle-plugin</li>
 <li>mysql-connector-java</li>
 </ul>
-<a name="For_developer"><h1>For developer</h1>
+<h2><a name="#For_developer"></a>For developer</h2>
 
 Open the project in your IDE.
 
@@ -50,19 +51,19 @@ Configure Tomcat:
 <ul>
 <li>add artifact;</li>
 <li>add sdk 11.0.3</li>
-<\ul>
+</ul>
 
-Add sdk 11.0.3 in project struсture.
+Add sdk 11.0.3 in project structure.
 
 Create a schema "internet_shop" in any SQL database.
 
-Use file interntet.shop.src.main.java.resources.init_db.sql to create all the tables required by this app.
+Use file internet.shop.src.main.java.resources.init_db.sql to create all the tables required by this app.
 
-At interntet.shop.src.main.java.interntet.shop.util.ConnectionUtil class use username and password for your DB to create a Connection.
+At internet.shop.src.main.java.internet.shop.util.ConnectionUtil class use username and password for your DB to create a Connection.
 
-Change a path in internte.tshop.src.main.java.resources.log4j.properties. It has to reach your logFile.
+Change a path in internet.shop.src.main.java.resources.log4j.properties. It has to reach your logFile.
 
 Run the project.
 
-<a name="authors"><h1>Authors</h1>
+<h1><a name="#authors"></a>Authors</h1>
 <a href="https://github.com/Merkald">Yaroslav Vysochanskii</a>
