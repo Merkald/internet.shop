@@ -6,7 +6,7 @@
 <li><a href="#For_developer">For developer</a></li>
 <li><a href="#authors">Authors</a></li>
 </ul>
-<a name="project_purpose"><h2>Project purpose</h2>
+<a name="project_purpose"></a><h2>Project purpose</h2>
 This is a template for creating an e-store.
 <br><br>
 It has login and registration forms.
@@ -30,7 +30,7 @@ Admins will have access to the following options:
   <li>All products for Admin - open list of products and provide possibility to delete or create product.</li>
   <li>All orders - open list with all orders.</li>
 </ul>
-<a name="project_structure"><h2>Project Structure</h2>
+<a name="project_structure"></a><h2>Project Structure</h2>
 <ul>
 <li>java 14</li>
 <li>Maven</li>
@@ -40,7 +40,7 @@ Admins will have access to the following options:
 <li>maven-checkstyle-plugin</li>
 <li>mysql-connector-java</li>
 </ul>
-<a name="For_developer"><h1>For developer</h1>
+<a name="For_developer"></a><h1>For developer</h1>
 
 Open the project in your IDE.
 
@@ -50,7 +50,7 @@ Configure Tomcat:
 <ul>
 <li>add artifact;</li>
 <li>add sdk 11.0.3</li>
-<\ul>
+</ul>
 
 Add sdk 11.0.3 in project struсture.
 
@@ -64,5 +64,5 @@ Change a path in internte.tshop.src.main.java.resources.log4j.properties. It has
 
 Run the project.
 
-<a name="authors"><h1>Authors</h1>
+<a name="authors"></a><h1>Authors</h1>
 <a href="https://github.com/Merkald">Yaroslav Vysochanskii</a>
