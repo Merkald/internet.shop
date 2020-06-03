@@ -52,15 +52,15 @@ Configure Tomcat:
 <li>add sdk 11.0.3</li>
 </ul>
 
-Add sdk 11.0.3 in project struсture.
+Add sdk 11.0.3 in project structure.
 
 Create a schema "internet_shop" in any SQL database.
 
-Use file interntet.shop.src.main.java.resources.init_db.sql to create all the tables required by this app.
+Use file internet.shop.src.main.java.resources.init_db.sql to create all the tables required by this app.
 
-At interntet.shop.src.main.java.interntet.shop.util.ConnectionUtil class use username and password for your DB to create a Connection.
+At internet.shop.src.main.java.internet.shop.util.ConnectionUtil class use username and password for your DB to create a Connection.
 
-Change a path in internte.tshop.src.main.java.resources.log4j.properties. It has to reach your logFile.
+Change a path in internet.shop.src.main.java.resources.log4j.properties. It has to reach your logFile.
 
 Run the project.
 

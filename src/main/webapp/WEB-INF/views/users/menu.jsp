@@ -11,13 +11,13 @@
 <button type="button" class="btn btn-primary"
         onclick='location.href="http://localhost:8080/users/logout"'>Logout
 </button>
-    <h5>${sessionScope.user.firstName} ${sessionScope.user.lastName}</h5>
-    <c:forEach var="role" items="${sessionScope.user.roles}">
-        <tr>
-            <td>
-                <c:out value="Role_name: ${role.roleName}"/>
-            </td>
-        </tr>
-    </c:forEach>
+<h5>${sessionScope.user.firstName} ${sessionScope.user.lastName}</h5>
+<c:forEach var="role" items="${sessionScope.user.roles}">
+    <tr>
+        <td>
+            <c:out value="Role_name: ${role.roleName}"/>
+        </td>
+    </tr>
+</c:forEach>
 </body>
 </html>
