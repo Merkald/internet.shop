@@ -8,7 +8,7 @@
 </head>
 <body class="bg-dark">
 <div class="bg-success">
-    <%@include file="/WEB-INF/views/users/userDetails.jsp" %>
+    <%@include file="/WEB-INF/views/users/menu.jsp" %>
 </div>
 <button type="button" class="btn btn-secondary"
         onclick='location.href="http://localhost:8080/"'>Home
